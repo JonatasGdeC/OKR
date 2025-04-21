@@ -11,4 +11,12 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\OKR.Application\OKR.Application.csproj" />
+      <ProjectReference Include="..\OKR.Communication\OKR.Communication.csproj" />
+      <ProjectReference Include="..\OKR.Domain\OKR.Domain.csproj" />
+      <ProjectReference Include="..\OKR.Exception\OKR.Exception.csproj" />
+      <ProjectReference Include="..\OKR.Infrastructure\OKR.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>

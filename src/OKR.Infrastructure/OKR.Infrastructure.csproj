@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\OKR.Domain\OKR.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -6,4 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\OKR.Communication\OKR.Communication.csproj" />
+      <ProjectReference Include="..\OKR.Domain\OKR.Domain.csproj" />
+      <ProjectReference Include="..\OKR.Exception\OKR.Exception.csproj" />
+    </ItemGroup>
+
 </Project>
