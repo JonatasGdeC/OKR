@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OKR.Application.UseCases.Guidelines.Register;
 using OKR.Communication.Requests;
 
 namespace OKR.API.Controllers;
@@ -10,6 +11,7 @@ public class GuidelineController : ControllerBase
   [HttpPost]
   public IActionResult Register([FromBody] RequestRegisterGuideline request)
   {
-    return Ok();
+    var useCase = new RegisterGuidelineUseCase().Execute(request);
+    return Created(string.Empty, useCase);
   }
 }
