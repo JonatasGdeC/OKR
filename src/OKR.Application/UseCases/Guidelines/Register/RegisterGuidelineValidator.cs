@@ -7,8 +7,16 @@ public class RegisterGuidelineValidator : AbstractValidator<RequestRegisterGuide
 {
   public RegisterGuidelineValidator()
   {
-    RuleFor(guideline => guideline.Title).NotEmpty().WithMessage("Title is required");
-    RuleFor(guideline => guideline.Description).NotEmpty().WithMessage("Description is required");
+    RuleFor(guideline => guideline.Title)
+      .NotEmpty().WithMessage("Title is required")
+      .MinimumLength(3).WithMessage("Title must have at least 3 characters")
+      .MaximumLength(25).WithMessage("Title must have a maximum of 25 characters");
+
+    RuleFor(guideline => guideline.Description)
+      .NotEmpty().WithMessage("Description is required")
+      .MinimumLength(3).WithMessage("Description must have at least 3 characters")
+      .MaximumLength(50).WithMessage("Description must have a maximum of 25 characters");;
+
     RuleFor(guideline => guideline.Type).IsInEnum().WithMessage("Type of guideline is invalid");
   }
 }
