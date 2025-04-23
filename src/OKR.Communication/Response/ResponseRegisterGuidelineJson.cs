@@ -4,9 +4,9 @@ namespace OKR.Communication.Response;
 
 public class ResponseRegisterGuidelineJson
 {
-  public Guid Id { get; init; }
-  public string Title { get; init; } = string.Empty;
-  public GuidelineType Type { get; init; }
-  public string Description { get; init; } = string.Empty;
-  public DateTime CreatedAt { get; init; }
+  public Guid Id { get; set; }
+  public string Title { get; set; } = string.Empty;
+  public GuidelineType Type { get; set; }
+  public string Description { get; set; } = string.Empty;
+  public DateTime CreatedAt { get; set; }
 }
