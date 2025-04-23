@@ -1,6 +1,5 @@
-using OKR.Communication.Enums;
 using OKR.Communication.Requests;
-using OKR.Communication.Response;
+using OKR.Communication.Response.Guideline;
 using OKR.Exception.ExceptionBase;
 
 namespace OKR.Application.UseCases.Guidelines.Register;

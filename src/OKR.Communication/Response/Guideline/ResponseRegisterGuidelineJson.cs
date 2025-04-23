@@ -1,6 +1,6 @@
 using OKR.Communication.Enums;
 
-namespace OKR.Communication.Response;
+namespace OKR.Communication.Response.Guideline;
 
 public class ResponseRegisterGuidelineJson
 {
