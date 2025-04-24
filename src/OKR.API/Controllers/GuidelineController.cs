@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OKR.Application.UseCases.Guidelines.Delete;
 using OKR.Application.UseCases.Guidelines.GetAll;
 using OKR.Application.UseCases.Guidelines.Register;
 using OKR.Communication.Requests;
@@ -30,6 +31,23 @@ public class GuidelineController : ControllerBase
       return Ok(useCase);
     }
 
+    return NoContent();
+  }
+
+  [HttpPut]
+  [Route("{id}")]
+  public IActionResult Update([FromRoute] Guid id, [FromBody] RequestRegisterGuideline request)
+  {
+    return NoContent();
+  }
+
+  [HttpDelete]
+  [Route("{id}")]
+  public IActionResult Delete(Guid id)
+  {
+    var useCase = new DeleteGuidelineUseCase();
+    useCase.Execute(id);
+    ListGuidelines.RemoveAll(guideline => guideline.Id == id);
     return NoContent();
   }
 }

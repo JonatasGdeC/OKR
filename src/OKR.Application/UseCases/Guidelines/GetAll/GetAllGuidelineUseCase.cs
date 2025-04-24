@@ -6,9 +6,9 @@ public class GetAllGuidelineUseCase
 {
   public ResponseAllGuidelineJson Execute(List<ResponseRegisterGuidelineJson> listSimulation)
   {
-    ResponseAllGuidelineJson response = new ResponseAllGuidelineJson();
-    response.Guidelines = listSimulation;
-
-    return response;
+    return new ResponseAllGuidelineJson
+    {
+      Guidelines = listSimulation
+    };
   }
 }
