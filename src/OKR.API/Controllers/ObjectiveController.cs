@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OKR.Application.UseCases.Objetives.Delete;
 using OKR.Application.UseCases.Objetives.GetAll;
 using OKR.Application.UseCases.Objetives.Register;
 using OKR.Application.UseCases.Objetives.Update;
@@ -43,6 +44,16 @@ public class ObjectiveController : ControllerBase
   public async Task<IActionResult> UpdateObjective([FromServices] IUpdateObjetiveUseCase useCase, [FromRoute] Guid id, [FromBody] RequestUpdateObjectiveJson requestRegister)
   {
     await useCase.Execute(id, requestRegister);
+    return NoContent();
+  }
+
+  [HttpDelete]
+  [Route("{id}")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+  public async Task<IActionResult> DeleteObjective([FromServices] IDeleteExpenseUseCase useCase, [FromRoute] Guid id)
+  {
+    await useCase.Execute(id);
     return NoContent();
   }
 }

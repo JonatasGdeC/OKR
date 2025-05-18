@@ -32,4 +32,17 @@ internal class ObjectiveWriteOnlyRepository : IObjectiveWriteOnlyRepository, IOb
   {
     _context.Objectives.Update(objective);
   }
+
+  public async Task<bool> Delete(Guid id)
+  {
+    Objective? result = await _context.Objectives.FirstOrDefaultAsync(expense => expense.Id == id);
+
+    if (result == null)
+    {
+      return false;
+    }
+
+    _context.Objectives.Remove(result);
+    return true;
+  }
 }
