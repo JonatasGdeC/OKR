@@ -1,4 +1,5 @@
 using AutoMapper;
+using OKR.Application.UseCases.Objetives.Register;
 using OKR.Communication.Requests;
 using OKR.Communication.Response;
 using OKR.Domain.Entities;
@@ -6,28 +7,35 @@ using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.Objectives;
 using OKR.Exception.ExceptionBase;
 
-namespace OKR.Application.UseCases.Objetives.Register;
+namespace OKR.Application.UseCases.Objetives.Update;
 
-public class RegisterObjectiveUseCase : IRegisterObjectiveUseCase
+public class UpdateObjetiveUseCase : IUpdateObjetiveUseCase
 {
-  private readonly IObjectiveWriteOnlyRepository _repository;
   private readonly IUnitOfWork _unitOfWork;
   private readonly IMapper _mapper;
+  private readonly IObjetiveUpdateOnlyRepository _repository;
 
-  public RegisterObjectiveUseCase(IObjectiveWriteOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
+  public UpdateObjetiveUseCase(IUnitOfWork unitOfWork, IMapper mapper, IObjetiveUpdateOnlyRepository repository)
   {
-    _repository = repository;
     _unitOfWork = unitOfWork;
     _mapper = mapper;
+    _repository = repository;
   }
 
-  public async Task<ResponseObjectiveJson> Execute(RequestObjectiveJson request)
+  public async Task Execute(Guid id, RequestObjectiveJson request)
   {
     Validate(request);
-    var entity = _mapper.Map<Objective>(request);
-    await _repository.Add(entity);
+
+    Objective? objetive = await _repository.GetById(id);
+
+    if (objetive == null)
+    {
+      //Error
+    }
+
+    Objective result = _mapper.Map(request, objetive);
+    await _repository.Update(result);
     await _unitOfWork.Commit();
-    return _mapper.Map<ResponseObjectiveJson>(entity);
   }
 
   private void Validate(RequestObjectiveJson request)

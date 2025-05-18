@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OKR.Application.UseCases.Objetives.GetAll;
 using OKR.Application.UseCases.Objetives.Register;
+using OKR.Application.UseCases.Objetives.Update;
 using OKR.Communication.Requests;
 using OKR.Communication.Response;
 
@@ -31,6 +32,17 @@ public class ObjectiveController : ControllerBase
       return Ok(reponse);
     }
 
+    return NoContent();
+  }
+
+  [HttpPut]
+  [Route("{id}")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+  public async Task<IActionResult> Update([FromServices] IUpdateObjetiveUseCase useCase, [FromRoute] Guid id, [FromBody] RequestObjectiveJson request)
+  {
+    await useCase.Execute(id, request);
     return NoContent();
   }
 }

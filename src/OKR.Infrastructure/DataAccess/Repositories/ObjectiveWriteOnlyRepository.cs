@@ -4,7 +4,7 @@ using OKR.Domain.Repositories.Objectives;
 
 namespace OKR.Infrastructure.DataAccess.Repositories;
 
-internal class ObjectiveWriteOnlyRepository : IObjectiveWriteOnlyRepository, IObjetiveReadOnlyRepository
+internal class ObjectiveWriteOnlyRepository : IObjectiveWriteOnlyRepository, IObjetiveReadOnlyRepository, IObjetiveUpdateOnlyRepository
 {
   private readonly OkrDbContext _context;
 
@@ -21,5 +21,15 @@ internal class ObjectiveWriteOnlyRepository : IObjectiveWriteOnlyRepository, IOb
   public async Task<List<Objective>> GetAll()
   {
     return await _context.Objectives.AsNoTracking().ToListAsync();
+  }
+
+  async Task<Objective?> IObjetiveUpdateOnlyRepository.GetById(Guid id)
+  {
+    return await _context.Objectives.FirstOrDefaultAsync(objective => objective.Id == id);
+  }
+
+  public async Task Update(Objective objective)
+  {
+    _context.Objectives.Update(objective);
   }
 }
