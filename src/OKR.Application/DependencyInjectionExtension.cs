@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using OKR.Application.AutoMapper;
+using OKR.Application.UseCases.Objetives.GetAll;
 using OKR.Application.UseCases.Objetives.Register;
 
 namespace OKR.Application;
@@ -20,5 +21,6 @@ public static class DependencyInjectionExtension
   private static void AddUseCase(this IServiceCollection services)
   {
     services.AddScoped<IRegisterObjectiveUseCase, RegisterObjectiveUseCase>();
+    services.AddScoped<IGetAllExpenseUseCase, GetAllExpenseUseCase>();
   }
 }
