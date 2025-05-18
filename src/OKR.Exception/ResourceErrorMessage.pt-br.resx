@@ -1,0 +1,41 @@
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="UNKNOWN_ERROR" xml:space="preserve">
+    <value>Erro desconhecido.</value>
+  </data>
+  <data name="TITLE_IS_REQUIRED" xml:space="preserve">
+    <value>O título é obrigatório.</value>
+  </data>
+  <data name="YEAR_IS_REQUIRED" xml:space="preserve">
+    <value>O ano é obrigatório.</value>
+  </data>
+  <data name="QUARTER_IS_REQUIRED" xml:space="preserve">
+    <value>O trimestre é obrigatório.</value>
+  </data>
+  <data name="TITLE_MINIMUM_CHARACTERS" xml:space="preserve">
+    <value>O título deve ter pelo menos 3 caracteres.</value>
+  </data>
+  <data name="TITLE_MAXIMUM_CHARACTERS" xml:space="preserve">
+    <value>O título deve ter no máximo 100 caracteres.</value>
+  </data>
+  <data name="YEAR_VALID" xml:space="preserve">
+    <value>O ano deve ser o ano atual ou o próximo.</value>
+  </data>
+  <data name="QUARTER_VALID" xml:space="preserve">
+    <value>The quarter must be between 1 and 4.</value>
+  </data>
+  <data name="OBJECTIVE_NOT_FOUND" xml:space="preserve">
+    <value>Objetivo não encontrado.</value>
+  </data>
+</root>

@@ -3,6 +3,7 @@ using OKR.Communication.Requests;
 using OKR.Domain.Entities;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.Objectives;
+using OKR.Exception;
 using OKR.Exception.ExceptionBase;
 
 namespace OKR.Application.UseCases.Objetives.Update;
@@ -28,7 +29,7 @@ public class UpdateObjetiveUseCase : IUpdateObjetiveUseCase
 
     if (objetive == null)
     {
-      //Error
+      throw new NotFoundException(ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
     }
 
     Objective result = _mapper.Map(requestRegister, objetive);
@@ -43,7 +44,7 @@ public class UpdateObjetiveUseCase : IUpdateObjetiveUseCase
 
     if (!result.IsValid)
     {
-      var errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
+      List<string> errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
       throw new ErrorOnValidationException(errorMessages);
     }
   }

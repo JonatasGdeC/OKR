@@ -1,5 +1,6 @@
 using FluentValidation;
 using OKR.Communication.Requests;
+using OKR.Exception;
 
 namespace OKR.Application.UseCases.Objetives.Register;
 
@@ -7,8 +8,8 @@ public class RegisterObjectiveValidator : AbstractValidator<RequestRegisterObjec
 {
   public RegisterObjectiveValidator()
   {
-    RuleFor(objective => objective.Title).NotEmpty().WithName("Title is required.").MinimumLength(3).WithMessage("Title must have at least 3 characters").MaximumLength(100).WithMessage("Title must have a maximum of 25 characters");
-    RuleFor(objective => objective.Year).NotEmpty().WithName("Year is required.").Must(year => year >= DateTime.Now.Year).WithMessage("Year must be the current year or later.");;
-    RuleFor(objective => objective.Quarter).NotEmpty().WithName("Quarter is required.").InclusiveBetween(1, 4).WithMessage("Quarter must be between 1 and 4.");;
+    RuleFor(objective => objective.Title).NotEmpty().WithName(ResourceErrorMessage.TITLE_IS_REQUIRED).MinimumLength(3).WithMessage(ResourceErrorMessage.TITLE_MINIMUM_CHARACTERS).MaximumLength(100).WithMessage(ResourceErrorMessage.TITLE_MAXIMUM_CHARACTERS);
+    RuleFor(objective => objective.Year).NotEmpty().WithName(ResourceErrorMessage.YEAR_IS_REQUIRED).Must(year => year >= DateTime.Now.Year).WithMessage(ResourceErrorMessage.YEAR_VALID);
+    RuleFor(objective => objective.Quarter).NotEmpty().WithName(ResourceErrorMessage.QUARTER_IS_REQUIRED).InclusiveBetween(1, 4).WithMessage(ResourceErrorMessage.QUARTER_VALID);;
   }
 }

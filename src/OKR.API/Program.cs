@@ -1,4 +1,5 @@
 using OKR.API.Filters;
+using OKR.API.Middleware;
 using OKR.Application;
 using OKR.Infrastructure;
 
@@ -24,6 +25,7 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
+app.UseMiddleware<CultureMiddleware>();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();

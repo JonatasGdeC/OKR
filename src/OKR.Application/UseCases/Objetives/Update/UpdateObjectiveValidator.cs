@@ -1,5 +1,6 @@
 using FluentValidation;
 using OKR.Communication.Requests;
+using OKR.Exception;
 
 namespace OKR.Application.UseCases.Objetives.Update;
 
@@ -7,6 +8,6 @@ public class UpdateObjectiveValidator : AbstractValidator<RequestUpdateObjective
 {
   public UpdateObjectiveValidator()
   {
-    RuleFor(objective => objective.Title).NotEmpty().WithName("Title is required.").MinimumLength(3).WithMessage("Title must have at least 3 characters").MaximumLength(100).WithMessage("Title must have a maximum of 25 characters");
+    RuleFor(objective => objective.Title).NotEmpty().WithName(ResourceErrorMessage.TITLE_IS_REQUIRED).MinimumLength(3).WithMessage(ResourceErrorMessage.TITLE_MINIMUM_CHARACTERS).MaximumLength(100).WithMessage(ResourceErrorMessage.TITLE_MAXIMUM_CHARACTERS);
   }
 }

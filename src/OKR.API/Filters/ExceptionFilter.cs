@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using OKR.Communication.Response;
+using OKR.Exception;
 using OKR.Exception.ExceptionBase;
 
 namespace OKR.API.Filters;
@@ -21,24 +22,16 @@ public class ExceptionFilter : IExceptionFilter
 
   private void HandleProjectException(ExceptionContext context)
   {
-    if (context.Exception is ErrorOnValidationException)
-    {
-      var ex = (ErrorOnValidationException)context.Exception;
-      var errorResponse = new ResponseErrorJson(ex.Errors);
-      context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-      context.Result = new BadRequestObjectResult(errorResponse);
-    }
-    else
-    {
-      var errorResponse = new ResponseErrorJson(context.Exception.Message);
-      context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-      context.Result = new BadRequestObjectResult(errorResponse);
-    }
+    var okrException = context.Exception as OkrException;
+    var errorResponse = new ResponseErrorJson(okrException!.GetErrors());
+
+    context.HttpContext.Response.StatusCode = okrException.StatusCode;
+    context.Result = new ObjectResult(errorResponse);
   }
 
   private void ThrowUnknowError(ExceptionContext context)
   {
-    var errorResponse = new ResponseErrorJson("unknown error");
+    var errorResponse = new ResponseErrorJson(ResourceErrorMessage.UNKNOWN_ERROR);
     context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
     context.Result = new ObjectResult(errorResponse);
   }
