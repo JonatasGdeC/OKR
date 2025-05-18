@@ -22,7 +22,7 @@ public class GetAllExpenseUseCase : IGetAllExpenseUseCase
 
     return new ResponseListObjectiveJson
     {
-      ListObjectives = _mapper.Map<List<ResponseObjectiveJson>>(result)
+      ListObjectives = _mapper.Map<List<ResponseObjectiveJson>>(source: result)
     };
   }
 }

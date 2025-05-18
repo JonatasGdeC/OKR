@@ -8,52 +8,52 @@ using OKR.Communication.Response;
 
 namespace OKR.API.Controllers;
 
-[Route("api/[controller]")]
+[Route(template: "api/[controller]")]
 [ApiController]
 public class ObjectiveController : ControllerBase
 {
 
   [HttpPost]
-  [ProducesResponseType(typeof(ResponseObjectiveJson), StatusCodes.Status201Created)]
-  [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(type: typeof(ResponseObjectiveJson), statusCode: StatusCodes.Status201Created)]
+  [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status400BadRequest)]
   public async Task<IActionResult> RegisterObjective([FromServices] IRegisterObjectiveUseCase useCase, [FromBody] RequestRegisterObjectiveJson requestRegister)
   {
-    var response = await useCase.Execute(requestRegister);
-    return Created(string.Empty, response);
+    var response = await useCase.Execute(requestRegister: requestRegister);
+    return Created(uri: string.Empty, value: response);
   }
 
   [HttpGet]
-  [ProducesResponseType(typeof(ResponseListObjectiveJson), StatusCodes.Status200OK)]
-  [ProducesResponseType(StatusCodes.Status404NotFound)]
+  [ProducesResponseType(type: typeof(ResponseListObjectiveJson), statusCode: StatusCodes.Status200OK)]
+  [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
   public async Task<IActionResult> GetAllObjectives([FromServices] IGetAllExpenseUseCase useCase)
   {
     ResponseListObjectiveJson reponse = await useCase.Execute();
     if (reponse.ListObjectives.Count != 0)
     {
-      return Ok(reponse);
+      return Ok(value: reponse);
     }
 
     return NoContent();
   }
 
   [HttpPut]
-  [Route("{id}")]
-  [ProducesResponseType(StatusCodes.Status204NoContent)]
-  [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-  [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+  [Route(template: "{id}")]
+  [ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
+  [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status404NotFound)]
   public async Task<IActionResult> UpdateObjective([FromServices] IUpdateObjetiveUseCase useCase, [FromRoute] Guid id, [FromBody] RequestUpdateObjectiveJson requestRegister)
   {
-    await useCase.Execute(id, requestRegister);
+    await useCase.Execute(id: id, requestRegister: requestRegister);
     return NoContent();
   }
 
   [HttpDelete]
-  [Route("{id}")]
-  [ProducesResponseType(StatusCodes.Status204NoContent)]
-  [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+  [Route(template: "{id}")]
+  [ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
+  [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status404NotFound)]
   public async Task<IActionResult> DeleteObjective([FromServices] IDeleteExpenseUseCase useCase, [FromRoute] Guid id)
   {
-    await useCase.Execute(id);
+    await useCase.Execute(id: id);
     return NoContent();
   }
 }

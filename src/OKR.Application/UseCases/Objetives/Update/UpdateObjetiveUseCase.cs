@@ -23,29 +23,29 @@ public class UpdateObjetiveUseCase : IUpdateObjetiveUseCase
 
   public async Task Execute(Guid id, RequestUpdateObjectiveJson requestRegister)
   {
-    Validate(requestRegister);
+    Validate(requestRegister: requestRegister);
 
-    Objective? objetive = await _repository.GetById(id);
+    Objective? objetive = await _repository.GetById(id: id);
 
     if (objetive == null)
     {
-      throw new NotFoundException(ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
+      throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
     }
 
-    Objective result = _mapper.Map(requestRegister, objetive);
-    await _repository.Update(result);
+    Objective result = _mapper.Map(source: requestRegister, destination: objetive);
+    await _repository.Update(objective: result);
     await _unitOfWork.Commit();
   }
 
   private void Validate(RequestUpdateObjectiveJson requestRegister)
   {
     var validator = new UpdateObjectiveValidator();
-    var result = validator.Validate(requestRegister);
+    var result = validator.Validate(instance: requestRegister);
 
     if (!result.IsValid)
     {
-      List<string> errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
-      throw new ErrorOnValidationException(errorMessages);
+      List<string> errorMessages = result.Errors.Select(selector: f => f.ErrorMessage).ToList();
+      throw new ErrorOnValidationException(errorsMessages: errorMessages);
     }
   }
 }

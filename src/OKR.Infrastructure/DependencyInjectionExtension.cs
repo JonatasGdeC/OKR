@@ -12,17 +12,17 @@ public static class DependencyInjectionExtension
 {
   public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
   {
-    AddDbContext(services, configuration);
-    AddRepositories(services);
+    AddDbContext(services: services, configuration: configuration);
+    AddRepositories(services: services);
   }
 
   private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
   {
-    var connectionString = configuration.GetConnectionString("connection");
-    var version = new Version(8, 0, 41);
-    var serverVersion = new MySqlServerVersion(version);
+    var connectionString = configuration.GetConnectionString(name: "connection");
+    var version = new Version(major: 8, minor: 0, build: 41);
+    var serverVersion = new MySqlServerVersion(version: version);
 
-    services.AddDbContext<OkrDbContext>(config => config.UseMySql(connectionString, serverVersion));
+    services.AddDbContext<OkrDbContext>(optionsAction: config => config.UseMySql(connectionString: connectionString, serverVersion: serverVersion));
   }
 
 

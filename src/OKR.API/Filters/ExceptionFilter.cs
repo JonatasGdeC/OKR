@@ -12,27 +12,27 @@ public class ExceptionFilter : IExceptionFilter
   {
     if (context.Exception is OkrException)
     {
-      HandleProjectException(context);
+      HandleProjectException(context: context);
     }
     else
     {
-      ThrowUnknowError(context);
+      ThrowUnknowError(context: context);
     }
   }
 
   private void HandleProjectException(ExceptionContext context)
   {
     var okrException = context.Exception as OkrException;
-    var errorResponse = new ResponseErrorJson(okrException!.GetErrors());
+    var errorResponse = new ResponseErrorJson(errorMessages: okrException!.GetErrors());
 
     context.HttpContext.Response.StatusCode = okrException.StatusCode;
-    context.Result = new ObjectResult(errorResponse);
+    context.Result = new ObjectResult(value: errorResponse);
   }
 
   private void ThrowUnknowError(ExceptionContext context)
   {
-    var errorResponse = new ResponseErrorJson(ResourceErrorMessage.UNKNOWN_ERROR);
+    var errorResponse = new ResponseErrorJson(errorMessage: ResourceErrorMessage.UNKNOWN_ERROR);
     context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-    context.Result = new ObjectResult(errorResponse);
+    context.Result = new ObjectResult(value: errorResponse);
   }
 }

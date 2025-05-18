@@ -8,8 +8,8 @@ public class RegisterObjectiveValidator : AbstractValidator<RequestRegisterObjec
 {
   public RegisterObjectiveValidator()
   {
-    RuleFor(objective => objective.Title).NotEmpty().WithName(ResourceErrorMessage.TITLE_IS_REQUIRED).MinimumLength(3).WithMessage(ResourceErrorMessage.TITLE_MINIMUM_CHARACTERS).MaximumLength(100).WithMessage(ResourceErrorMessage.TITLE_MAXIMUM_CHARACTERS);
-    RuleFor(objective => objective.Year).NotEmpty().WithName(ResourceErrorMessage.YEAR_IS_REQUIRED).Must(year => year >= DateTime.Now.Year).WithMessage(ResourceErrorMessage.YEAR_VALID);
-    RuleFor(objective => objective.Quarter).NotEmpty().WithName(ResourceErrorMessage.QUARTER_IS_REQUIRED).InclusiveBetween(1, 4).WithMessage(ResourceErrorMessage.QUARTER_VALID);;
+    RuleFor(expression: objective => objective.Title).NotEmpty().WithName(overridePropertyName: ResourceErrorMessage.TITLE_IS_REQUIRED).MinimumLength(minimumLength: 3).WithMessage(errorMessage: ResourceErrorMessage.TITLE_MINIMUM_CHARACTERS).MaximumLength(maximumLength: 100).WithMessage(errorMessage: ResourceErrorMessage.TITLE_MAXIMUM_CHARACTERS);
+    RuleFor(expression: objective => objective.Year).NotEmpty().WithName(overridePropertyName: ResourceErrorMessage.YEAR_IS_REQUIRED).Must(predicate: year => year >= DateTime.Now.Year).WithMessage(errorMessage: ResourceErrorMessage.YEAR_VALID);
+    RuleFor(expression: objective => objective.Quarter).NotEmpty().WithName(overridePropertyName: ResourceErrorMessage.QUARTER_IS_REQUIRED).InclusiveBetween(from: 1, to: 4).WithMessage(errorMessage: ResourceErrorMessage.QUARTER_VALID);;
   }
 }

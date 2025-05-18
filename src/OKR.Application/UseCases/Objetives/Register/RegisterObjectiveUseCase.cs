@@ -23,22 +23,22 @@ public class RegisterObjectiveUseCase : IRegisterObjectiveUseCase
 
   public async Task<ResponseObjectiveJson> Execute(RequestRegisterObjectiveJson requestRegister)
   {
-    Validate(requestRegister);
-    var entity = _mapper.Map<Objective>(requestRegister);
-    await _repository.Add(entity);
+    Validate(requestRegister: requestRegister);
+    var entity = _mapper.Map<Objective>(source: requestRegister);
+    await _repository.Add(objective: entity);
     await _unitOfWork.Commit();
-    return _mapper.Map<ResponseObjectiveJson>(entity);
+    return _mapper.Map<ResponseObjectiveJson>(source: entity);
   }
 
   private void Validate(RequestRegisterObjectiveJson requestRegister)
   {
     var validator = new RegisterObjectiveValidator();
-    var result = validator.Validate(requestRegister);
+    var result = validator.Validate(instance: requestRegister);
 
     if (!result.IsValid)
     {
-      var errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
-      throw new ErrorOnValidationException(errorMessages);
+      var errorMessages = result.Errors.Select(selector: f => f.ErrorMessage).ToList();
+      throw new ErrorOnValidationException(errorsMessages: errorMessages);
     }
   }
 }

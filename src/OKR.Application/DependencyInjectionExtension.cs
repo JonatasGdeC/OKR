@@ -11,13 +11,13 @@ public static class DependencyInjectionExtension
 {
   public static void AddApplication(this IServiceCollection services)
   {
-    AddAutoMapper(services);
-    AddUseCase(services);
+    AddAutoMapper(services: services);
+    AddUseCase(services: services);
   }
 
   private static void AddAutoMapper(this IServiceCollection services)
   {
-    services.AddAutoMapper(typeof(AutoMapping));
+    services.AddAutoMapper(profileAssemblyMarkerTypes: typeof(AutoMapping));
   }
 
   private static void AddUseCase(this IServiceCollection services)

@@ -4,7 +4,7 @@ namespace OKR.Exception.ExceptionBase;
 
 public class NotFoundException : OkrException
 {
-  public NotFoundException(string message) : base(message)
+  public NotFoundException(string message) : base(messagr: message)
   {
   }
 

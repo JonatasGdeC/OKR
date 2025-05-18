@@ -15,7 +15,7 @@ internal class ObjectiveWriteOnlyRepository : IObjectiveWriteOnlyRepository, IOb
 
   public async Task Add(Objective objective)
   {
-    await _context.Objectives.AddAsync(objective);
+    await _context.Objectives.AddAsync(entity: objective);
   }
 
   public async Task<List<Objective>> GetAll()
@@ -25,24 +25,24 @@ internal class ObjectiveWriteOnlyRepository : IObjectiveWriteOnlyRepository, IOb
 
   async Task<Objective?> IObjetiveUpdateOnlyRepository.GetById(Guid id)
   {
-    return await _context.Objectives.FirstOrDefaultAsync(objective => objective.Id == id);
+    return await _context.Objectives.FirstOrDefaultAsync(predicate: objective => objective.Id == id);
   }
 
   public async Task Update(Objective objective)
   {
-    _context.Objectives.Update(objective);
+    _context.Objectives.Update(entity: objective);
   }
 
   public async Task<bool> Delete(Guid id)
   {
-    Objective? result = await _context.Objectives.FirstOrDefaultAsync(expense => expense.Id == id);
+    Objective? result = await _context.Objectives.FirstOrDefaultAsync(predicate: expense => expense.Id == id);
 
     if (result == null)
     {
       return false;
     }
 
-    _context.Objectives.Remove(result);
+    _context.Objectives.Remove(entity: result);
     return true;
   }
 }
