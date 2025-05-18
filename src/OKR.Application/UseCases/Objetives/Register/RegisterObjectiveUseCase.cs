@@ -21,19 +21,19 @@ public class RegisterObjectiveUseCase : IRegisterObjectiveUseCase
     _mapper = mapper;
   }
 
-  public async Task<ResponseObjectiveJson> Execute(RequestObjectiveJson request)
+  public async Task<ResponseObjectiveJson> Execute(RequestRegisterObjectiveJson requestRegister)
   {
-    Validate(request);
-    var entity = _mapper.Map<Objective>(request);
+    Validate(requestRegister);
+    var entity = _mapper.Map<Objective>(requestRegister);
     await _repository.Add(entity);
     await _unitOfWork.Commit();
     return _mapper.Map<ResponseObjectiveJson>(entity);
   }
 
-  private void Validate(RequestObjectiveJson request)
+  private void Validate(RequestRegisterObjectiveJson requestRegister)
   {
-    var validator = new ObjectiveValidator();
-    var result = validator.Validate(request);
+    var validator = new RegisterObjectiveValidator();
+    var result = validator.Validate(requestRegister);
 
     if (!result.IsValid)
     {

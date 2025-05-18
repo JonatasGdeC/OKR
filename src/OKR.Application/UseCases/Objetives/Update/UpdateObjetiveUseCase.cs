@@ -1,7 +1,5 @@
 using AutoMapper;
-using OKR.Application.UseCases.Objetives.Register;
 using OKR.Communication.Requests;
-using OKR.Communication.Response;
 using OKR.Domain.Entities;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.Objectives;
@@ -22,9 +20,9 @@ public class UpdateObjetiveUseCase : IUpdateObjetiveUseCase
     _repository = repository;
   }
 
-  public async Task Execute(Guid id, RequestObjectiveJson request)
+  public async Task Execute(Guid id, RequestUpdateObjectiveJson requestRegister)
   {
-    Validate(request);
+    Validate(requestRegister);
 
     Objective? objetive = await _repository.GetById(id);
 
@@ -33,15 +31,15 @@ public class UpdateObjetiveUseCase : IUpdateObjetiveUseCase
       //Error
     }
 
-    Objective result = _mapper.Map(request, objetive);
+    Objective result = _mapper.Map(requestRegister, objetive);
     await _repository.Update(result);
     await _unitOfWork.Commit();
   }
 
-  private void Validate(RequestObjectiveJson request)
+  private void Validate(RequestUpdateObjectiveJson requestRegister)
   {
-    var validator = new ObjectiveValidator();
-    var result = validator.Validate(request);
+    var validator = new UpdateObjectiveValidator();
+    var result = validator.Validate(requestRegister);
 
     if (!result.IsValid)
     {

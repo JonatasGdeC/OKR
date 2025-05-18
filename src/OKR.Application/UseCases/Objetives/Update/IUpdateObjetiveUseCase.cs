@@ -4,5 +4,5 @@ namespace OKR.Application.UseCases.Objetives.Update;
 
 public interface IUpdateObjetiveUseCase
 {
-  Task Execute(Guid id, RequestObjectiveJson request);
+  Task Execute(Guid id, RequestUpdateObjectiveJson requestRegister);
 }

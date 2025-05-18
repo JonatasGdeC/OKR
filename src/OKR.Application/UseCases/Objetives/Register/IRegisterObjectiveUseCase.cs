@@ -5,5 +5,5 @@ namespace OKR.Application.UseCases.Objetives.Register;
 
 public interface IRegisterObjectiveUseCase
 {
-  Task<ResponseObjectiveJson> Execute(RequestObjectiveJson request);
+  Task<ResponseObjectiveJson> Execute(RequestRegisterObjectiveJson requestRegister);
 }

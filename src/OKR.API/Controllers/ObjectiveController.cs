@@ -15,16 +15,16 @@ public class ObjectiveController : ControllerBase
   [HttpPost]
   [ProducesResponseType(typeof(ResponseObjectiveJson), StatusCodes.Status201Created)]
   [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-  public async Task<IActionResult> Register([FromServices] IRegisterObjectiveUseCase useCase, [FromBody] RequestObjectiveJson request)
+  public async Task<IActionResult> RegisterObjective([FromServices] IRegisterObjectiveUseCase useCase, [FromBody] RequestRegisterObjectiveJson requestRegister)
   {
-    var response = await useCase.Execute(request);
+    var response = await useCase.Execute(requestRegister);
     return Created(string.Empty, response);
   }
 
   [HttpGet]
   [ProducesResponseType(typeof(ResponseListObjectiveJson), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
-  public async Task<IActionResult> GetAll([FromServices] IGetAllExpenseUseCase useCase)
+  public async Task<IActionResult> GetAllObjectives([FromServices] IGetAllExpenseUseCase useCase)
   {
     ResponseListObjectiveJson reponse = await useCase.Execute();
     if (reponse.ListObjectives.Count != 0)
@@ -40,9 +40,9 @@ public class ObjectiveController : ControllerBase
   [ProducesResponseType(StatusCodes.Status204NoContent)]
   [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
   [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-  public async Task<IActionResult> Update([FromServices] IUpdateObjetiveUseCase useCase, [FromRoute] Guid id, [FromBody] RequestObjectiveJson request)
+  public async Task<IActionResult> UpdateObjective([FromServices] IUpdateObjetiveUseCase useCase, [FromRoute] Guid id, [FromBody] RequestUpdateObjectiveJson requestRegister)
   {
-    await useCase.Execute(id, request);
+    await useCase.Execute(id, requestRegister);
     return NoContent();
   }
 }
