@@ -13,10 +13,10 @@ public class ExceptionFilter : IExceptionFilter
     {
       HandleProjectException(context);
     }
-    else
-    {
-      ThrowUnknowError(context);
-    }
+    // else
+    // {
+    //   ThrowUnknowError(context);
+    // }
   }
 
   private void HandleProjectException(ExceptionContext context)

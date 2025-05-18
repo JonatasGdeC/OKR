@@ -19,8 +19,4 @@
       <ProjectReference Include="..\OKR.Infrastructure\OKR.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
-
 </Project>
