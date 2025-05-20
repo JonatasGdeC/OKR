@@ -4,11 +4,11 @@ using OKR.Domain.Repositories.Objectives;
 
 namespace OKR.Infrastructure.DataAccess.Repositories;
 
-internal class ObjectiveWriteOnlyRepository : IObjectiveWriteOnlyRepository, IObjetiveReadOnlyRepository, IObjetiveUpdateOnlyRepository
+internal class ObjectiveRepository : IObjectiveWriteOnlyRepository, IObjetiveReadOnlyRepository, IObjetiveUpdateOnlyRepository
 {
   private readonly OkrDbContext _context;
 
-  public ObjectiveWriteOnlyRepository(OkrDbContext context)
+  public ObjectiveRepository(OkrDbContext context)
   {
     _context = context;
   }
