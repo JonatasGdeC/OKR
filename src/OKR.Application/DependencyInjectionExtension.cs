@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using OKR.Application.AutoMapper;
 using OKR.Application.UseCases.KeyResult.GetById;
+using OKR.Application.UseCases.KeyResult.Register;
 using OKR.Application.UseCases.Objetives.Delete;
 using OKR.Application.UseCases.Objetives.GetAll;
 using OKR.Application.UseCases.Objetives.Register;
@@ -29,6 +30,6 @@ public static class DependencyInjectionExtension
     services.AddScoped<IDeleteExpenseUseCase, DeleteExpenseUseCase>();
 
     services.AddScoped<IGetKeyResultByIdUseCase, GetKeyResultByObjectiveId>();
-
+    services.AddScoped<IRegisterKeyResultUseCase, RegisterKeyResultUseCase>();
   }
 }

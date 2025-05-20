@@ -33,7 +33,7 @@
   <data name="TITLE_MINIMUM_CHARACTERS" xml:space="preserve">
     <value>Le titre doit comporter au moins 3 caractères.</value>
   </data>
-  <data name="TITLE_MAXIMUM_CHARACTERS" xml:space="preserve">
+  <data name="TITLE_MAXIMUM_CHARACTERS_IN_OBJECTIVES" xml:space="preserve">
     <value>Le titre doit comporter au maximum 100 caractères.</value>
   </data>
   <data name="YEAR_VALID" xml:space="preserve">
@@ -44,5 +44,23 @@
   </data>
   <data name="OBJECTIVE_NOT_FOUND" xml:space="preserve">
     <value>Cible non trouvée.</value>
+  </data>
+  <data name="TITLE_MAXIMUM_CHARACTERS_IN_KEYRESULT" xml:space="preserve">
+    <value>Le titre doit comporter au maximum 500 caractères.</value>
+  </data>
+  <data name="NUMBER_KR_IS_REQUIRED" xml:space="preserve">
+    <value>Le numéro KR est obligatoire.</value>
+  </data>
+  <data name="KR_VALID" xml:space="preserve">
+    <value>Le numéro KR doit être supérieur ou égal à 1 et inférieur ou égal à 5.</value>
+  </data>
+  <data name="KR_NUMBER_ALREADY_EXISTS" xml:space="preserve">
+    <value>Le numéro KR existe déjà.</value>
+  </data>
+  <data name="KR_TITLE_ALREADY_EXISTS" xml:space="preserve">
+    <value>Le titre KR existe déjà.</value>
+  </data>
+  <data name="THE_OBJECTIVE_ALREADY_HAS_5_KR" xml:space="preserve">
+    <value>L'objectif a déjà 5 KR.</value>
   </data>
 </root>

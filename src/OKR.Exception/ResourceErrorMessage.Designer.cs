@@ -75,9 +75,9 @@ namespace OKR.Exception {
             }
         }
         
-        public static string TITLE_MAXIMUM_CHARACTERS {
+        public static string TITLE_MAXIMUM_CHARACTERS_IN_OBJECTIVES {
             get {
-                return ResourceManager.GetString("TITLE_MAXIMUM_CHARACTERS", resourceCulture);
+                return ResourceManager.GetString("TITLE_MAXIMUM_CHARACTERS_IN_OBJECTIVES", resourceCulture);
             }
         }
         
@@ -96,6 +96,42 @@ namespace OKR.Exception {
         public static string OBJECTIVE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("OBJECTIVE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        public static string TITLE_MAXIMUM_CHARACTERS_IN_KEYRESULT {
+            get {
+                return ResourceManager.GetString("TITLE_MAXIMUM_CHARACTERS_IN_KEYRESULT", resourceCulture);
+            }
+        }
+        
+        public static string NUMBER_KR_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("NUMBER_KR_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        public static string KR_VALID {
+            get {
+                return ResourceManager.GetString("KR_VALID", resourceCulture);
+            }
+        }
+        
+        public static string KR_NUMBER_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("KR_NUMBER_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        public static string KR_TITLE_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("KR_TITLE_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        public static string THE_OBJECTIVE_ALREADY_HAS_5_KR {
+            get {
+                return ResourceManager.GetString("THE_OBJECTIVE_ALREADY_HAS_5_KR", resourceCulture);
             }
         }
     }

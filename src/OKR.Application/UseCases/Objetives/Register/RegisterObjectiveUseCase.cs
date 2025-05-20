@@ -37,7 +37,7 @@ public class RegisterObjectiveUseCase : IRegisterObjectiveUseCase
 
     if (!result.IsValid)
     {
-      var errorMessages = result.Errors.Select(selector: f => f.ErrorMessage).ToList();
+      List<string> errorMessages = result.Errors.Select(selector: f => f.ErrorMessage).ToList();
       throw new ErrorOnValidationException(errorsMessages: errorMessages);
     }
   }
