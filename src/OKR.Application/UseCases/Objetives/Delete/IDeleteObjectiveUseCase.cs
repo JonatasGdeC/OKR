@@ -1,6 +1,6 @@
 namespace OKR.Application.UseCases.Objetives.Delete;
 
-public interface IDeleteExpenseUseCase
+public interface IDeleteObjectiveUseCase
 {
   Task Execute(Guid id);
 }

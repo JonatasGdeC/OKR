@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using OKR.Application.UseCases.KeyResult.Delete;
 using OKR.Application.UseCases.KeyResult.GetById;
 using OKR.Application.UseCases.KeyResult.Register;
+using OKR.Application.UseCases.Objetives.Delete;
 using OKR.Communication.Requests;
 using OKR.Communication.Response;
 
@@ -28,5 +30,15 @@ public class KeyResultController : ControllerBase
   {
     var response = await useCase.Execute(id: objectiveId);
     return Ok(value: response);
+  }
+
+  [HttpDelete]
+  [Route(template: "{keyResultId}")]
+  [ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
+  [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status404NotFound)]
+  public async Task<IActionResult> DeleteKeyResult([FromServices] IDeleteKeyResultUseCase useCase, [FromRoute] Guid keyResultId)
+  {
+    await useCase.Execute(keyResultId);
+    return NoContent();
   }
 }

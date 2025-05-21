@@ -35,7 +35,7 @@ internal class ObjectiveRepository : IObjectiveWriteOnlyRepository, IObjetiveRea
 
   public async Task<bool> Delete(Guid id)
   {
-    Objective? result = await _context.Objectives.FirstOrDefaultAsync(predicate: expense => expense.Id == id);
+    Objective? result = await _context.Objectives.FirstOrDefaultAsync(predicate: objetive => objetive.Id == id);
 
     if (result == null)
     {

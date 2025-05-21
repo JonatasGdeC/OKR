@@ -57,15 +57,15 @@ namespace OKR.Exception {
             }
         }
         
-        internal static string YEAR_IS_REQUIRED {
+        internal static string OBJECTIVE_YEAR_IS_REQUIRED {
             get {
-                return ResourceManager.GetString("YEAR_IS_REQUIRED", resourceCulture);
+                return ResourceManager.GetString("OBJECTIVE_YEAR_IS_REQUIRED", resourceCulture);
             }
         }
         
-        internal static string QUARTER_IS_REQUIRED {
+        internal static string OBJECTIVE_QUARTER_IS_REQUIRED {
             get {
-                return ResourceManager.GetString("QUARTER_IS_REQUIRED", resourceCulture);
+                return ResourceManager.GetString("OBJECTIVE_QUARTER_IS_REQUIRED", resourceCulture);
             }
         }
         
@@ -75,21 +75,21 @@ namespace OKR.Exception {
             }
         }
         
-        internal static string TITLE_MAXIMUM_CHARACTERS_IN_OBJECTIVES {
+        internal static string OBJECTIVE_TITLE_MAXIMUM_CHARACTERS {
             get {
-                return ResourceManager.GetString("TITLE_MAXIMUM_CHARACTERS_IN_OBJECTIVES", resourceCulture);
+                return ResourceManager.GetString("OBJECTIVE_TITLE_MAXIMUM_CHARACTERS", resourceCulture);
             }
         }
         
-        internal static string YEAR_VALID {
+        internal static string OBJECTIVE_YEAR_INVALID {
             get {
-                return ResourceManager.GetString("YEAR_VALID", resourceCulture);
+                return ResourceManager.GetString("OBJECTIVE_YEAR_INVALID", resourceCulture);
             }
         }
         
-        internal static string QUARTER_VALID {
+        internal static string OBJECTIVE_QUARTER_INVALID {
             get {
-                return ResourceManager.GetString("QUARTER_VALID", resourceCulture);
+                return ResourceManager.GetString("OBJECTIVE_QUARTER_INVALID", resourceCulture);
             }
         }
         
@@ -99,39 +99,45 @@ namespace OKR.Exception {
             }
         }
         
-        internal static string TITLE_MAXIMUM_CHARACTERS_IN_KEYRESULT {
+        internal static string KEY_RESULT_TITLE_MAXIMUM_CHARACTERS {
             get {
-                return ResourceManager.GetString("TITLE_MAXIMUM_CHARACTERS_IN_KEYRESULT", resourceCulture);
+                return ResourceManager.GetString("KEY_RESULT_TITLE_MAXIMUM_CHARACTERS", resourceCulture);
             }
         }
         
-        internal static string NUMBER_KR_IS_REQUIRED {
+        internal static string KEY_RESULT_NUMBER_IS_REQUIRED {
             get {
-                return ResourceManager.GetString("NUMBER_KR_IS_REQUIRED", resourceCulture);
+                return ResourceManager.GetString("KEY_RESULT_NUMBER_IS_REQUIRED", resourceCulture);
             }
         }
         
-        internal static string KR_VALID {
+        internal static string KEY_RESULT_NUMBER_INVALID {
             get {
-                return ResourceManager.GetString("KR_VALID", resourceCulture);
+                return ResourceManager.GetString("KEY_RESULT_NUMBER_INVALID", resourceCulture);
             }
         }
         
-        internal static string KR_NUMBER_ALREADY_EXISTS {
+        internal static string KEY_RESULT_NUMBER_ALREADY_EXISTS {
             get {
-                return ResourceManager.GetString("KR_NUMBER_ALREADY_EXISTS", resourceCulture);
+                return ResourceManager.GetString("KEY_RESULT_NUMBER_ALREADY_EXISTS", resourceCulture);
             }
         }
         
-        internal static string KR_TITLE_ALREADY_EXISTS {
+        internal static string KEY_RESULT_TITLE_ALREADY_EXISTS {
             get {
-                return ResourceManager.GetString("KR_TITLE_ALREADY_EXISTS", resourceCulture);
+                return ResourceManager.GetString("KEY_RESULT_TITLE_ALREADY_EXISTS", resourceCulture);
             }
         }
         
-        internal static string THE_OBJECTIVE_ALREADY_HAS_5_KR {
+        internal static string OBJECTIVE_HAS_5_KEY_RESULT {
             get {
-                return ResourceManager.GetString("THE_OBJECTIVE_ALREADY_HAS_5_KR", resourceCulture);
+                return ResourceManager.GetString("OBJECTIVE_HAS_5_KEY_RESULT", resourceCulture);
+            }
+        }
+        
+        internal static string KEY_RESULT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("KEY_RESULT_NOT_FOUND", resourceCulture);
             }
         }
     }

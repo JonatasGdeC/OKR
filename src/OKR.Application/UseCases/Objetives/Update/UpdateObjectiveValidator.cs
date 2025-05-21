@@ -8,6 +8,6 @@ public class UpdateObjectiveValidator : AbstractValidator<RequestUpdateObjective
 {
   public UpdateObjectiveValidator()
   {
-    RuleFor(expression: objective => objective.Title).NotEmpty().WithName(overridePropertyName: ResourceErrorMessage.TITLE_IS_REQUIRED).MinimumLength(minimumLength: 3).WithMessage(errorMessage: ResourceErrorMessage.TITLE_MINIMUM_CHARACTERS).MaximumLength(maximumLength: 100).WithMessage(errorMessage: ResourceErrorMessage.TITLE_MAXIMUM_CHARACTERS_IN_OBJECTIVES);
+    RuleFor(expression: objective => objective.Title).NotEmpty().WithName(overridePropertyName: ResourceErrorMessage.TITLE_IS_REQUIRED).MinimumLength(minimumLength: 3).WithMessage(errorMessage: ResourceErrorMessage.TITLE_MINIMUM_CHARACTERS).MaximumLength(maximumLength: 100).WithMessage(errorMessage: ResourceErrorMessage.OBJECTIVE_TITLE_MAXIMUM_CHARACTERS);
   }
 }

@@ -5,12 +5,12 @@ using OKR.Exception.ExceptionBase;
 
 namespace OKR.Application.UseCases.Objetives.Delete;
 
-public class DeleteExpenseUseCase : IDeleteExpenseUseCase
+public class DeleteObjectiveUseCase : IDeleteObjectiveUseCase
 {
   private readonly IObjectiveWriteOnlyRepository _repository;
   private readonly IUnitOfWork _unitOfWork;
 
-  public DeleteExpenseUseCase(IObjectiveWriteOnlyRepository repository, IUnitOfWork unitOfWork)
+  public DeleteObjectiveUseCase(IObjectiveWriteOnlyRepository repository, IUnitOfWork unitOfWork)
   {
     _repository = repository;
     _unitOfWork = unitOfWork;

@@ -25,7 +25,7 @@ public class ObjectiveController : ControllerBase
   [HttpGet]
   [ProducesResponseType(type: typeof(ResponseListObjectiveJson), statusCode: StatusCodes.Status200OK)]
   [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
-  public async Task<IActionResult> GetAllObjectives([FromServices] IGetAllExpenseUseCase useCase)
+  public async Task<IActionResult> GetAllObjectives([FromServices] IGetAllObjectiveUseCase useCase)
   {
     ResponseListObjectiveJson reponse = await useCase.Execute();
     if (reponse.ListObjectives.Count != 0)
@@ -51,7 +51,7 @@ public class ObjectiveController : ControllerBase
   [Route(template: "{id}")]
   [ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
   [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status404NotFound)]
-  public async Task<IActionResult> DeleteObjective([FromServices] IDeleteExpenseUseCase useCase, [FromRoute] Guid id)
+  public async Task<IActionResult> DeleteObjective([FromServices] IDeleteObjectiveUseCase useCase, [FromRoute] Guid id)
   {
     await useCase.Execute(id: id);
     return NoContent();

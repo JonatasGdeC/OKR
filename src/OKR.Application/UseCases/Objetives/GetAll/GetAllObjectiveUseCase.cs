@@ -5,12 +5,12 @@ using OKR.Domain.Repositories.Objectives;
 
 namespace OKR.Application.UseCases.Objetives.GetAll;
 
-public class GetAllExpenseUseCase : IGetAllExpenseUseCase
+public class GetAllObjectiveUseCase : IGetAllObjectiveUseCase
 {
   private readonly IObjetiveReadOnlyRepository _repository;
   private readonly IMapper _mapper;
 
-  public GetAllExpenseUseCase(IObjetiveReadOnlyRepository repository, IMapper mapper)
+  public GetAllObjectiveUseCase(IObjetiveReadOnlyRepository repository, IMapper mapper)
   {
     _repository = repository;
     _mapper = mapper;

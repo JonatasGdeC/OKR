@@ -41,17 +41,17 @@ public class RegisterKeyResultUseCase : IRegisterKeyResultUseCase
     List<Domain.Entities.KeyResult>? list = await _repositoryReadKeyResult.GetKeyResultsByObjectiveId(requestRegister.ObjectiveId);
     if (list != null && list.Count == 5)
     {
-      throw new NotFoundException(ResourceErrorMessage.THE_OBJECTIVE_ALREADY_HAS_5_KR);
+      throw new NotFoundException(ResourceErrorMessage.OBJECTIVE_HAS_5_KEY_RESULT);
     }
 
     if (list != null && list.Exists(kr => kr.NumberKr == requestRegister.NumberKr))
     {
-      throw new NotFoundException(ResourceErrorMessage.KR_NUMBER_ALREADY_EXISTS);
+      throw new NotFoundException(ResourceErrorMessage.KEY_RESULT_NUMBER_ALREADY_EXISTS);
     }
 
     if (list != null && list.Exists(kr => kr.Title == requestRegister.Title))
     {
-      throw new NotFoundException(ResourceErrorMessage.KR_TITLE_ALREADY_EXISTS);
+      throw new NotFoundException(ResourceErrorMessage.KEY_RESULT_TITLE_ALREADY_EXISTS);
     }
 
     var entity = _mapper.Map<Domain.Entities.KeyResult>(source: requestRegister);

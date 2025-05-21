@@ -18,6 +18,19 @@ internal class KeyResultRepository : IKeyResultReadOnlyRepository, IKeyResultWri
     await _context.KeyResults.AddAsync(entity: keyResult);
   }
 
+  public async Task<bool> Delete(Guid id)
+  {
+    KeyResult? result = await _context.KeyResults.FirstOrDefaultAsync(predicate: keyResult => keyResult.Id == id);
+
+    if (result == null)
+    {
+      return false;
+    }
+
+    _context.KeyResults.Remove(entity: result);
+    return true;
+  }
+
   public async Task<List<KeyResult>?> GetKeyResultsByObjectiveId(Guid id)
   {
     return await _context.KeyResults.Where(kr => kr.ObjectiveId == id).AsNoTracking().ToListAsync();

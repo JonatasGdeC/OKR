@@ -2,7 +2,7 @@ using OKR.Communication.Response;
 
 namespace OKR.Application.UseCases.Objetives.GetAll;
 
-public interface IGetAllExpenseUseCase
+public interface IGetAllObjectiveUseCase
 {
   Task<ResponseListObjectiveJson> Execute();
 }

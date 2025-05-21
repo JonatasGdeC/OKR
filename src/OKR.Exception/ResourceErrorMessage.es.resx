@@ -17,43 +17,46 @@
   <data name="TITLE_IS_REQUIRED" xml:space="preserve">
     <value>El título es obligatorio.</value>
   </data>
-  <data name="YEAR_IS_REQUIRED" xml:space="preserve">
+  <data name="OBJECTIVE_YEAR_IS_REQUIRED" xml:space="preserve">
     <value>El año es obligatorio.</value>
   </data>
-  <data name="QUARTER_IS_REQUIRED" xml:space="preserve">
+  <data name="OBJECTIVE_QUARTER_IS_REQUIRED" xml:space="preserve">
     <value>El trimestre es obligatorio.</value>
   </data>
   <data name="TITLE_MINIMUM_CHARACTERS" xml:space="preserve">
     <value>El título debe tener al menos 3 caracteres.</value>
   </data>
-  <data name="TITLE_MAXIMUM_CHARACTERS_IN_OBJECTIVES" xml:space="preserve">
+  <data name="OBJECTIVE_TITLE_MAXIMUM_CHARACTERS" xml:space="preserve">
     <value>El título debe tener un máximo de 100 caracteres.</value>
   </data>
-  <data name="YEAR_VALID" xml:space="preserve">
+  <data name="OBJECTIVE_YEAR_INVALID" xml:space="preserve">
     <value>El año debe ser el año actual o el año siguiente.</value>
   </data>
-  <data name="QUARTER_VALID" xml:space="preserve">
+  <data name="OBJECTIVE_QUARTER_INVALID" xml:space="preserve">
     <value>El trimestre debe estar entre 1 y 4.</value>
   </data>
   <data name="OBJECTIVE_NOT_FOUND" xml:space="preserve">
     <value>Objetivo no encontrado.</value>
   </data>
-  <data name="TITLE_MAXIMUM_CHARACTERS_IN_KEYRESULT" xml:space="preserve">
+  <data name="KEY_RESULT_TITLE_MAXIMUM_CHARACTERS" xml:space="preserve">
     <value>El título debe tener un máximo de 500 caracteres.</value>
   </data>
-  <data name="NUMBER_KR_IS_REQUIRED" xml:space="preserve">
+  <data name="KEY_RESULT_NUMBER_IS_REQUIRED" xml:space="preserve">
     <value>El número KR es obligatorio.</value>
   </data>
-  <data name="KR_VALID" xml:space="preserve">
+  <data name="KEY_RESULT_NUMBER_INVALID" xml:space="preserve">
     <value>El número KR debe ser mayor o igual a 1 y menor o igual a 5.</value>
   </data>
-  <data name="KR_NUMBER_ALREADY_EXISTS" xml:space="preserve">
+  <data name="KEY_RESULT_NUMBER_ALREADY_EXISTS" xml:space="preserve">
     <value>El número KR ya existe.</value>
   </data>
-  <data name="KR_TITLE_ALREADY_EXISTS" xml:space="preserve">
+  <data name="KEY_RESULT_TITLE_ALREADY_EXISTS" xml:space="preserve">
     <value>El título KR ya existe.</value>
   </data>
-  <data name="THE_OBJECTIVE_ALREADY_HAS_5_KR" xml:space="preserve">
+  <data name="OBJECTIVE_HAS_5_KEY_RESULT" xml:space="preserve">
     <value>El objetivo ya tiene 5 KR.</value>
+  </data>
+  <data name="KEY_RESULT_NOT_FOUND" xml:space="preserve">
+    <value>Resultado clave no encontrado.</value>
   </data>
 </root>
