@@ -2,7 +2,7 @@ using FluentValidation;
 using OKR.Communication.Requests;
 using OKR.Exception;
 
-namespace OKR.Application.UseCases.KeyResult.Register;
+namespace OKR.Application.UseCases.KeyResult;
 
 public class RegisterKeyResultValidator : AbstractValidator<RequestRegisterKeyResultJson>
 {

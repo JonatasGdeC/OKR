@@ -4,7 +4,7 @@ using OKR.Domain.Repositories.KeyResults;
 
 namespace OKR.Infrastructure.DataAccess.Repositories;
 
-internal class KeyResultRepository : IKeyResultReadOnlyRepository, IKeyResultWriteOnlyRepository
+internal class KeyResultRepository : IKeyResultReadOnlyRepository, IKeyResultWriteOnlyRepository, IKeyResultUpdateOnlyRepository
 {
   private readonly OkrDbContext _context;
 
@@ -34,5 +34,15 @@ internal class KeyResultRepository : IKeyResultReadOnlyRepository, IKeyResultWri
   public async Task<List<KeyResult>?> GetKeyResultsByObjectiveId(Guid id)
   {
     return await _context.KeyResults.Where(kr => kr.ObjectiveId == id).AsNoTracking().ToListAsync();
+  }
+
+  public async Task<KeyResult?> GetById(Guid id)
+  {
+    return await _context.KeyResults.FirstOrDefaultAsync(predicate: keyResult => keyResult.Id == id);
+  }
+
+  public async Task Update(KeyResult keyResult)
+  {
+    _context.KeyResults.Update(keyResult);
   }
 }

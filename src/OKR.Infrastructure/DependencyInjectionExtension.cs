@@ -35,6 +35,7 @@ public static class DependencyInjectionExtension
 
     services.AddScoped<IKeyResultReadOnlyRepository, KeyResultRepository>();
     services.AddScoped<IKeyResultWriteOnlyRepository, KeyResultRepository>();
+    services.AddScoped<IKeyResultUpdateOnlyRepository, KeyResultRepository>();
 
     services.AddScoped<IUnitOfWork, UnitOfWork>();
   }
