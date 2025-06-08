@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OKR.Application.UseCases.Objetives.Delete;
 using OKR.Application.UseCases.Objetives.GetAll;
+using OKR.Application.UseCases.Objetives.GetByQuarterAndYear;
 using OKR.Application.UseCases.Objetives.Register;
 using OKR.Application.UseCases.Objetives.Update;
 using OKR.Communication.Requests;
@@ -28,6 +29,21 @@ public class ObjectiveController : ControllerBase
   public async Task<IActionResult> GetAllObjectives([FromServices] IGetAllObjectiveUseCase useCase)
   {
     ResponseListObjectiveJson reponse = await useCase.Execute();
+    if (reponse.ListObjectives.Count != 0)
+    {
+      return Ok(value: reponse);
+    }
+
+    return NoContent();
+  }
+
+  [HttpGet]
+  [Route(template: "{quarter}/{year}")]
+  [ProducesResponseType(type: typeof(ResponseObjectiveJson), statusCode: StatusCodes.Status200OK)]
+  [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+  public async Task<IActionResult> GetObjetiveByQuarterAndYear([FromServices] IGetObjectiveByQuarterAndYear useCase, [FromRoute] int quarter, int year)
+  {
+    ResponseListObjectiveJson reponse = await useCase.Execute(quarter: quarter, year: year);
     if (reponse.ListObjectives.Count != 0)
     {
       return Ok(value: reponse);

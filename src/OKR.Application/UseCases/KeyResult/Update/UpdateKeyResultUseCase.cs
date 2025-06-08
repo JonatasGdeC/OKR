@@ -22,13 +22,13 @@ public class UpdateKeyResultUseCase : IUpdateKeyResultUseCase
 
   public async Task Execute(Guid id, RequestRegisterKeyResultJson request)
   {
-    Validate(request);
+    Validate(requestRegister: request);
 
-    Domain.Entities.KeyResult? keyResult = await _repository.GetById(id);
+    Domain.Entities.KeyResult? keyResult = await _repository.GetById(id: id);
 
     if (keyResult == null)
     {
-      throw new NotFoundException(ResourceErrorMessage.KEY_RESULT_NOT_FOUND);
+      throw new NotFoundException(message: ResourceErrorMessage.KEY_RESULT_NOT_FOUND);
     }
 
     Domain.Entities.KeyResult result = _mapper.Map(source: request, destination: keyResult);

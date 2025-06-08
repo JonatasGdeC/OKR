@@ -30,28 +30,32 @@ public class RegisterKeyResultUseCase : IRegisterKeyResultUseCase
 
   public async Task<ResponseKeyResultJson> Execute(RequestRegisterKeyResultJson requestRegister)
   {
-    Validate(requestRegister);
+    Validate(requestRegister: requestRegister);
 
     Objective? objective = await _repositoryObjetive.GetById(id: requestRegister.ObjectiveId);
     if (objective == null)
     {
-      throw new NotFoundException(ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
+      throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
     }
 
-    List<Domain.Entities.KeyResult>? list = await _repositoryReadKeyResult.GetKeyResultsByObjectiveId(requestRegister.ObjectiveId);
-    if (list != null && list.Count == 5)
+    List<Domain.Entities.KeyResult> list = await _repositoryReadKeyResult.GetKeyResultsByObjectiveId(id: requestRegister.ObjectiveId) ?? [];
+
+    bool listWasCountFive = list.Count == 5;
+    if (listWasCountFive)
     {
-      throw new NotFoundException(ResourceErrorMessage.OBJECTIVE_HAS_5_KEY_RESULT);
+      throw new BadRequestException(message: ResourceErrorMessage.OBJECTIVE_HAS_5_KEY_RESULT);
     }
 
-    if (list != null && list.Exists(kr => kr.NumberKr == requestRegister.NumberKr))
+    bool listHasNumberKr = list.Exists(match: kr => kr.NumberKr == requestRegister.NumberKr);
+    if (listHasNumberKr)
     {
-      throw new NotFoundException(ResourceErrorMessage.KEY_RESULT_NUMBER_ALREADY_EXISTS);
+      throw new BadRequestException(message: ResourceErrorMessage.KEY_RESULT_NUMBER_ALREADY_EXISTS);
     }
 
-    if (list != null && list.Exists(kr => kr.Title == requestRegister.Title))
+    bool listHasTitle = list.Exists(match: kr => kr.Title == requestRegister.Title);
+    if (listHasTitle)
     {
-      throw new NotFoundException(ResourceErrorMessage.KEY_RESULT_TITLE_ALREADY_EXISTS);
+      throw new BadRequestException(message: ResourceErrorMessage.KEY_RESULT_TITLE_ALREADY_EXISTS);
     }
 
     var entity = _mapper.Map<Domain.Entities.KeyResult>(source: requestRegister);

@@ -19,7 +19,7 @@ public class KeyResultController : ControllerBase
   public async Task<IActionResult> RegisterKeyResult([FromServices] IRegisterKeyResultUseCase useCase, RequestRegisterKeyResultJson request)
   {
     var response = await useCase.Execute(requestRegister: request);
-    return Created(uri: string.Empty, response);
+    return Created(uri: string.Empty, value: response);
   }
 
   [HttpGet]
@@ -38,7 +38,7 @@ public class KeyResultController : ControllerBase
   [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status400BadRequest)]
   public async Task<IActionResult> UpdateKeyResult([FromServices] IUpdateKeyResultUseCase useCase, [FromRoute] Guid keyResultId, RequestRegisterKeyResultJson request)
   {
-    await useCase.Execute(keyResultId, request);
+    await useCase.Execute(id: keyResultId, request: request);
     return NoContent();
   }
 
@@ -48,7 +48,7 @@ public class KeyResultController : ControllerBase
   [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status404NotFound)]
   public async Task<IActionResult> DeleteKeyResult([FromServices] IDeleteKeyResultUseCase useCase, [FromRoute] Guid keyResultId)
   {
-    await useCase.Execute(keyResultId);
+    await useCase.Execute(id: keyResultId);
     return NoContent();
   }
 }

@@ -33,7 +33,7 @@ internal class KeyResultRepository : IKeyResultReadOnlyRepository, IKeyResultWri
 
   public async Task<List<KeyResult>?> GetKeyResultsByObjectiveId(Guid id)
   {
-    return await _context.KeyResults.Where(kr => kr.ObjectiveId == id).AsNoTracking().ToListAsync();
+    return await _context.KeyResults.Where(predicate: kr => kr.ObjectiveId == id).AsNoTracking().ToListAsync();
   }
 
   public async Task<KeyResult?> GetById(Guid id)
@@ -43,6 +43,6 @@ internal class KeyResultRepository : IKeyResultReadOnlyRepository, IKeyResultWri
 
   public async Task Update(KeyResult keyResult)
   {
-    _context.KeyResults.Update(keyResult);
+    _context.KeyResults.Update(entity: keyResult);
   }
 }

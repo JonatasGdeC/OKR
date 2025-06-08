@@ -6,10 +6,5 @@ public class KeyResult
   public Guid ObjectiveId { get; init; }
   public int NumberKr { get; init; }
   public required string Title { get; init; }
-  public DateTime CreateDate { get; init; }
-
-  public KeyResult()
-  {
-    CreateDate = DateTime.UtcNow;
-  }
+  public DateTime CreateDate = DateTime.UtcNow;
 }

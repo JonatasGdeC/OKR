@@ -6,6 +6,7 @@ using OKR.Application.UseCases.KeyResult.Register;
 using OKR.Application.UseCases.KeyResult.Update;
 using OKR.Application.UseCases.Objetives.Delete;
 using OKR.Application.UseCases.Objetives.GetAll;
+using OKR.Application.UseCases.Objetives.GetByQuarterAndYear;
 using OKR.Application.UseCases.Objetives.Register;
 using OKR.Application.UseCases.Objetives.Update;
 
@@ -28,6 +29,7 @@ public static class DependencyInjectionExtension
   {
     services.AddScoped<IRegisterObjectiveUseCase, RegisterObjectiveUseCase>();
     services.AddScoped<IGetAllObjectiveUseCase, GetAllObjectiveUseCase>();
+    services.AddScoped<IGetObjectiveByQuarterAndYear, GetObjectiveByQuarterAndYear>();
     services.AddScoped<IUpdateObjetiveUseCase, UpdateObjetiveUseCase>();
     services.AddScoped<IDeleteObjectiveUseCase, DeleteObjectiveUseCase>();
 

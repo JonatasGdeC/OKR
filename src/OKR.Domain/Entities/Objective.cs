@@ -6,10 +6,5 @@ public class Objective
   public required string Title { get; init; }
   public int Year { get; init; }
   public int Quarter { get; init; }
-  public DateTime CreateDate { get; init; }
-
-  public Objective()
-  {
-    CreateDate = DateTime.UtcNow;
-  }
+  public DateTime CreateDate = DateTime.UtcNow;
 }

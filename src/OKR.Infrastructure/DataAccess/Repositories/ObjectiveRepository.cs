@@ -23,6 +23,11 @@ internal class ObjectiveRepository : IObjectiveWriteOnlyRepository, IObjetiveRea
     return await _context.Objectives.AsNoTracking().ToListAsync();
   }
 
+  public async Task<List<Objective>> GetByQuarterAndYear(int quarter, int year)
+  {
+    return await _context.Objectives.Where(x => x.Quarter == quarter && x.Year == year).ToListAsync();
+  }
+
   async Task<Objective?> IObjetiveUpdateOnlyRepository.GetById(Guid id)
   {
     return await _context.Objectives.FirstOrDefaultAsync(predicate: objective => objective.Id == id);
