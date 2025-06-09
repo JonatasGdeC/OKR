@@ -80,4 +80,7 @@
   <data name="ACTION_END_DATE_INVALID" xml:space="preserve">
     <value>A data final deve ser maior ou igual à data inicial.</value>
   </data>
+  <data name="ACTION_NOT_FOUND" xml:space="preserve">
+    <value>Ação não encontrada.</value>
+  </data>
 </root>

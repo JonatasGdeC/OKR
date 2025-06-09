@@ -182,5 +182,11 @@ namespace OKR.Exception {
                 return ResourceManager.GetString("ACTION_END_DATE_INVALID", resourceCulture);
             }
         }
+        
+        public static string ACTION_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ACTION_NOT_FOUND", resourceCulture);
+            }
+        }
     }
 }
