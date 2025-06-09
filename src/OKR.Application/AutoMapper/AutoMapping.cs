@@ -15,14 +15,14 @@ public class AutoMapping : Profile
 
   private void RequestEntity()
   {
-    CreateMap<RequestRegisterObjectiveJson, Objective>();
-    CreateMap<RequestUpdateObjectiveJson, Objective>();
-    CreateMap<RequestRegisterKeyResultJson, KeyResult>();
+    CreateMap<RequestRegisterObjectiveJson, ObjectiveEntity>();
+    CreateMap<RequestUpdateObjectiveJson, ObjectiveEntity>();
+    CreateMap<RequestRegisterKeyResultJson, KeyResultEntity>();
   }
 
   private void EntityToResponse()
   {
-    CreateMap<Objective, ResponseObjectiveJson>();
-    CreateMap<KeyResult, ResponseKeyResultJson>();
+    CreateMap<ObjectiveEntity, ResponseObjectiveJson>();
+    CreateMap<KeyResultEntity, ResponseKeyResultJson>();
   }
 }

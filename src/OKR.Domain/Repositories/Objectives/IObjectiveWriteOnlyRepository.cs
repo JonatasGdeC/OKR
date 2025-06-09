@@ -4,7 +4,7 @@ namespace OKR.Domain.Repositories.Objectives;
 
 public interface IObjectiveWriteOnlyRepository
 {
-  Task Add(Objective objective);
+  Task Add(ObjectiveEntity objective);
   /// <summary>
   /// This function returns TRUE if the deletion was successful otherwise returns false
   /// </summary>

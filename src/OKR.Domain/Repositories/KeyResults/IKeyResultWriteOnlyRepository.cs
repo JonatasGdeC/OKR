@@ -4,7 +4,7 @@ namespace OKR.Domain.Repositories.KeyResults;
 
 public interface IKeyResultWriteOnlyRepository
 {
-  Task Add(KeyResult keyResult);
+  Task Add(KeyResultEntity keyResult);
   /// <summary>
   /// This function returns TRUE if the deletion was successful otherwise returns false
   /// </summary>

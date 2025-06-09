@@ -13,34 +13,34 @@ internal class ObjectiveRepository : IObjectiveWriteOnlyRepository, IObjetiveRea
     _context = context;
   }
 
-  public async Task Add(Objective objective)
+  public async Task Add(ObjectiveEntity objective)
   {
     await _context.Objectives.AddAsync(entity: objective);
   }
 
-  public async Task<List<Objective>> GetAll()
+  public async Task<List<ObjectiveEntity>> GetAll()
   {
     return await _context.Objectives.AsNoTracking().ToListAsync();
   }
 
-  public async Task<List<Objective>> GetByQuarterAndYear(int quarter, int year)
+  public async Task<List<ObjectiveEntity>> GetByQuarterAndYear(int quarter, int year)
   {
     return await _context.Objectives.Where(x => x.Quarter == quarter && x.Year == year).ToListAsync();
   }
 
-  async Task<Objective?> IObjetiveUpdateOnlyRepository.GetById(Guid id)
+  async Task<ObjectiveEntity?> IObjetiveUpdateOnlyRepository.GetById(Guid id)
   {
     return await _context.Objectives.FirstOrDefaultAsync(predicate: objective => objective.Id == id);
   }
 
-  public async Task Update(Objective objective)
+  public async Task Update(ObjectiveEntity objective)
   {
     _context.Objectives.Update(entity: objective);
   }
 
   public async Task<bool> Delete(Guid id)
   {
-    Objective? result = await _context.Objectives.FirstOrDefaultAsync(predicate: objetive => objetive.Id == id);
+    ObjectiveEntity? result = await _context.Objectives.FirstOrDefaultAsync(predicate: objetive => objetive.Id == id);
 
     if (result == null)
     {

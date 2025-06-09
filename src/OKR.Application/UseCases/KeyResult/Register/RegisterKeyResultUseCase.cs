@@ -32,13 +32,13 @@ public class RegisterKeyResultUseCase : IRegisterKeyResultUseCase
   {
     Validate(requestRegister: requestRegister);
 
-    Objective? objective = await _repositoryObjetive.GetById(id: requestRegister.ObjectiveId);
+    ObjectiveEntity? objective = await _repositoryObjetive.GetById(id: requestRegister.ObjectiveId);
     if (objective == null)
     {
       throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
     }
 
-    List<Domain.Entities.KeyResult> list = await _repositoryReadKeyResult.GetKeyResultsByObjectiveId(id: requestRegister.ObjectiveId) ?? [];
+    List<KeyResultEntity> list = await _repositoryReadKeyResult.GetKeyResultsByObjectiveId(id: requestRegister.ObjectiveId) ?? [];
 
     bool listWasCountFive = list.Count == 5;
     if (listWasCountFive)
@@ -58,7 +58,7 @@ public class RegisterKeyResultUseCase : IRegisterKeyResultUseCase
       throw new BadRequestException(message: ResourceErrorMessage.KEY_RESULT_TITLE_ALREADY_EXISTS);
     }
 
-    var entity = _mapper.Map<Domain.Entities.KeyResult>(source: requestRegister);
+    var entity = _mapper.Map<KeyResultEntity>(source: requestRegister);
     await _repositoryWriteKeyResult.Add(keyResult: entity);
     await _unitOfWork.Commit();
     return _mapper.Map<ResponseKeyResultJson>(source: entity);

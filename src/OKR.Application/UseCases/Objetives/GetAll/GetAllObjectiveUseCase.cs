@@ -18,7 +18,7 @@ public class GetAllObjectiveUseCase : IGetAllObjectiveUseCase
 
   public async Task<ResponseListObjectiveJson> Execute()
   {
-    List<Objective> result = await _repository.GetAll();
+    List<ObjectiveEntity> result = await _repository.GetAll();
 
     return new ResponseListObjectiveJson
     {

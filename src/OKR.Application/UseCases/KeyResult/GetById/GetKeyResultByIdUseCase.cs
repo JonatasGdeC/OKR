@@ -23,13 +23,13 @@ public class GetKeyResultByObjectiveId : IGetKeyResultByIdUseCase
 
   public async Task<ResponseListKeyResultJson> Execute(Guid id)
   {
-    Objective? objetive = await _repositoryObjetive.GetById(id: id);
+    ObjectiveEntity? objetive = await _repositoryObjetive.GetById(id: id);
     if (objetive == null)
     {
       throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
     }
 
-    List<Domain.Entities.KeyResult>? response = await _repositoryKeyResult.GetKeyResultsByObjectiveId(id: id);
+    List<KeyResultEntity>? response = await _repositoryKeyResult.GetKeyResultsByObjectiveId(id: id);
     if (response == null)
     {
       throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);

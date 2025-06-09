@@ -1,5 +1,6 @@
 using AutoMapper;
 using OKR.Communication.Requests;
+using OKR.Domain.Entities;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.KeyResults;
 using OKR.Exception;
@@ -24,14 +25,14 @@ public class UpdateKeyResultUseCase : IUpdateKeyResultUseCase
   {
     Validate(requestRegister: request);
 
-    Domain.Entities.KeyResult? keyResult = await _repository.GetById(id: id);
+    KeyResultEntity? keyResult = await _repository.GetById(id: id);
 
     if (keyResult == null)
     {
       throw new NotFoundException(message: ResourceErrorMessage.KEY_RESULT_NOT_FOUND);
     }
 
-    Domain.Entities.KeyResult result = _mapper.Map(source: request, destination: keyResult);
+    KeyResultEntity result = _mapper.Map(source: request, destination: keyResult);
 
     await _repository.Update(keyResult: result);
     await _unitOfWork.Commit();

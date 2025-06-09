@@ -24,7 +24,7 @@ public class RegisterObjectiveUseCase : IRegisterObjectiveUseCase
   public async Task<ResponseObjectiveJson> Execute(RequestRegisterObjectiveJson requestRegister)
   {
     Validate(requestRegister: requestRegister);
-    var entity = _mapper.Map<Objective>(source: requestRegister);
+    var entity = _mapper.Map<ObjectiveEntity>(source: requestRegister);
     await _repository.Add(objective: entity);
     await _unitOfWork.Commit();
     return _mapper.Map<ResponseObjectiveJson>(source: entity);

@@ -25,14 +25,14 @@ public class UpdateObjetiveUseCase : IUpdateObjetiveUseCase
   {
     Validate(requestRegister: requestRegister);
 
-    Objective? objetive = await _repository.GetById(id: id);
+    ObjectiveEntity? objetive = await _repository.GetById(id: id);
 
     if (objetive == null)
     {
       throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
     }
 
-    Objective result = _mapper.Map(source: requestRegister, destination: objetive);
+    ObjectiveEntity result = _mapper.Map(source: requestRegister, destination: objetive);
     await _repository.Update(objective: result);
     await _unitOfWork.Commit();
   }

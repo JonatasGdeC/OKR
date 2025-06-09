@@ -4,5 +4,5 @@ namespace OKR.Domain.Repositories.KeyResults;
 
 public interface IKeyResultReadOnlyRepository
 {
-  Task<List<KeyResult>?> GetKeyResultsByObjectiveId(Guid id);
+  Task<List<KeyResultEntity>?> GetKeyResultsByObjectiveId(Guid id);
 }
