@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using OKR.Application.AutoMapper;
+using OKR.Application.UseCases.Action.Delete;
 using OKR.Application.UseCases.Action.GetActionByKeyResultId;
 using OKR.Application.UseCases.Action.Register;
 using OKR.Application.UseCases.KeyResult.Delete;
@@ -42,5 +43,6 @@ public static class DependencyInjectionExtension
 
     services.AddScoped<IRegisterActionUseCase, RegisterActionUseCase>();
     services.AddScoped<IGetActionsByKeyResultIdUseCase, GetActionsByKeyResultIdUseCase>();
+    services.AddScoped<IDeleteActionUseCase, DeleteActionUseCase>();
   }
 }

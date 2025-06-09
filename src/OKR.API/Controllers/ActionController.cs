@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OKR.Application.UseCases.Action.Delete;
 using OKR.Application.UseCases.Action.GetActionByKeyResultId;
 using OKR.Application.UseCases.Action.Register;
 using OKR.Communication.Requests;
@@ -28,5 +29,15 @@ public class ActionController : ControllerBase
   {
     var response = await useCase.Execute(keyResultId: keyResultId);
     return Ok(value: response);
+  }
+
+  [HttpDelete]
+  [Route(template: "{actionId}")]
+  [ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
+  [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status404NotFound)]
+  public async Task<IActionResult> DeleteKeyResult([FromServices] IDeleteActionUseCase useCase, [FromRoute] Guid actionId)
+  {
+    await useCase.Execute(actionId: actionId);
+    return NoContent();
   }
 }

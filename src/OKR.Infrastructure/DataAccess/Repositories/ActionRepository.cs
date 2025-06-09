@@ -32,4 +32,17 @@ internal class ActionRepository : IActionReadOnlyRepository, IActionUpdateOnlyRe
   {
     await _context.Actions.AddAsync(action);
   }
+
+  public async Task<bool> Delete(Guid id)
+  {
+    ActionEntity? result = await _context.Actions.FirstOrDefaultAsync(predicate: action => action.Id == id);
+
+    if (result == null)
+    {
+      return false;
+    }
+
+    _context.Actions.Remove(entity: result);
+    return true;
+  }
 }
