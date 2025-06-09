@@ -8,5 +8,4 @@ public class RequestRegisterActionJson
   public string? Notes { get; set; }
   public DateTime StartDate { get; set; }
   public DateTime EndDate { get; set; }
-  public int CurrentProgress { get; set; }
 }
