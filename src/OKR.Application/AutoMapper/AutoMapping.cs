@@ -18,6 +18,7 @@ public class AutoMapping : Profile
     CreateMap<RequestRegisterObjectiveJson, ObjectiveEntity>();
     CreateMap<RequestUpdateObjectiveJson, ObjectiveEntity>();
     CreateMap<RequestRegisterKeyResultJson, KeyResultEntity>();
+    CreateMap<RequestRegisterActionJson, ActionEntity>();
   }
 
   private void EntityToResponse()

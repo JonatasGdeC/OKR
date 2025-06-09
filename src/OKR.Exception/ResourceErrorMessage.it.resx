@@ -66,4 +66,25 @@
   <data name="KEY_RESULT_NOT_FOUND" xml:space="preserve">
     <value>Risultato chiave non trovato.</value>
   </data>
+  <data name="DESCRIPTION_IS_REQUIRED" xml:space="preserve">
+    <value>La descrizione è obbligatoria.</value>
+  </data>
+  <data name="DESCRIPTION_MINIMUM_CHARACTERS" xml:space="preserve">
+    <value>La descrizione deve contenere più di 3 caratteri.</value>
+  </data>
+  <data name="DESCRIPTION_MAXIMUM_CHARACTERS" xml:space="preserve">
+    <value>La descrizione deve contenere meno di 1000 caratteri.</value>
+  </data>
+  <data name="ACTION_PROGRESS_INVALID" xml:space="preserve">
+    <value>Il progresso deve essere maggiore di 0 o minore di 100.</value>
+  </data>
+  <data name="ACTION_WEEK_MAXIMUM_CHARACTERS" xml:space="preserve">
+    <value>L'azione della settimana non può superare i 1000 caratteri.</value>
+  </data>
+  <data name="ACTION_NOTES_MAXIMUM_CHARACTERS" xml:space="preserve">
+    <value>Le note non possono superare i 1000 caratteri.</value>
+  </data>
+  <data name="ACTION_END_DATE_INVALID" xml:space="preserve">
+    <value>La data di fine deve essere maggiore o uguale alla data di inizio.</value>
+  </data>
 </root>

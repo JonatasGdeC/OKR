@@ -140,5 +140,47 @@ namespace OKR.Exception {
                 return ResourceManager.GetString("KEY_RESULT_NOT_FOUND", resourceCulture);
             }
         }
+        
+        internal static string DESCRIPTION_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("DESCRIPTION_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        internal static string DESCRIPTION_MINIMUM_CHARACTERS {
+            get {
+                return ResourceManager.GetString("DESCRIPTION_MINIMUM_CHARACTERS", resourceCulture);
+            }
+        }
+        
+        internal static string DESCRIPTION_MAXIMUM_CHARACTERS {
+            get {
+                return ResourceManager.GetString("DESCRIPTION_MAXIMUM_CHARACTERS", resourceCulture);
+            }
+        }
+        
+        internal static string ACTION_PROGRESS_INVALID {
+            get {
+                return ResourceManager.GetString("ACTION_PROGRESS_INVALID", resourceCulture);
+            }
+        }
+        
+        internal static string ACTION_WEEK_MAXIMUM_CHARACTERS {
+            get {
+                return ResourceManager.GetString("ACTION_WEEK_MAXIMUM_CHARACTERS", resourceCulture);
+            }
+        }
+        
+        internal static string ACTION_NOTES_MAXIMUM_CHARACTERS {
+            get {
+                return ResourceManager.GetString("ACTION_NOTES_MAXIMUM_CHARACTERS", resourceCulture);
+            }
+        }
+        
+        internal static string ACTION_END_DATE_INVALID {
+            get {
+                return ResourceManager.GetString("ACTION_END_DATE_INVALID", resourceCulture);
+            }
+        }
     }
 }
