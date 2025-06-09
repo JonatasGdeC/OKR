@@ -3,7 +3,6 @@ using OKR.Application.UseCases.KeyResult.Delete;
 using OKR.Application.UseCases.KeyResult.GetById;
 using OKR.Application.UseCases.KeyResult.Register;
 using OKR.Application.UseCases.KeyResult.Update;
-using OKR.Application.UseCases.Objetives.Update;
 using OKR.Communication.Requests;
 using OKR.Communication.Response;
 

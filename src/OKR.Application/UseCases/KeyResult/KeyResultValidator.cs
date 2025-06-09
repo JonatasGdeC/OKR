@@ -8,7 +8,7 @@ public class RegisterKeyResultValidator : AbstractValidator<RequestRegisterKeyRe
 {
   public RegisterKeyResultValidator()
   {
-    RuleFor(expression: objective => objective.Title).NotEmpty().WithName(overridePropertyName: ResourceErrorMessage.TITLE_IS_REQUIRED).MinimumLength(minimumLength: 3).WithMessage(errorMessage: ResourceErrorMessage.TITLE_MINIMUM_CHARACTERS).MaximumLength(maximumLength: 500).WithMessage(errorMessage: ResourceErrorMessage.KEY_RESULT_TITLE_MAXIMUM_CHARACTERS);
-    RuleFor(expression: objective => objective.NumberKr).NotEmpty().WithName(overridePropertyName: ResourceErrorMessage.KEY_RESULT_NUMBER_IS_REQUIRED).Must(predicate: number => number >= 1 && number <= 5).WithMessage(errorMessage: ResourceErrorMessage.KEY_RESULT_NUMBER_INVALID);
+    RuleFor(expression: objective => objective.Title).NotEmpty().WithMessage(errorMessage: ResourceErrorMessage.TITLE_IS_REQUIRED).MinimumLength(minimumLength: 3).WithMessage(errorMessage: ResourceErrorMessage.TITLE_MINIMUM_CHARACTERS).MaximumLength(maximumLength: 500).WithMessage(errorMessage: ResourceErrorMessage.KEY_RESULT_TITLE_MAXIMUM_CHARACTERS);
+    RuleFor(expression: objective => objective.NumberKr).NotEmpty().WithMessage(errorMessage: ResourceErrorMessage.KEY_RESULT_NUMBER_IS_REQUIRED).Must(predicate: number => number >= 1 && number <= 5).WithMessage(errorMessage: ResourceErrorMessage.KEY_RESULT_NUMBER_INVALID);
   }
 }

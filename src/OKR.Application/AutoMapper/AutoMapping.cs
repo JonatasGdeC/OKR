@@ -24,5 +24,6 @@ public class AutoMapping : Profile
   {
     CreateMap<ObjectiveEntity, ResponseObjectiveJson>();
     CreateMap<KeyResultEntity, ResponseKeyResultJson>();
+    CreateMap<ActionEntity, ResponseActionJson>();
   }
 }

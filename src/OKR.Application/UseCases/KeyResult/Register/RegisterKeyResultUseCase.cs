@@ -39,8 +39,8 @@ public class RegisterKeyResultUseCase : IRegisterKeyResultUseCase
     }
 
     List<KeyResultEntity> list = await _repositoryReadKeyResult.GetKeyResultsByObjectiveId(id: requestRegister.ObjectiveId) ?? [];
-
     bool listWasCountFive = list.Count == 5;
+
     if (listWasCountFive)
     {
       throw new BadRequestException(message: ResourceErrorMessage.OBJECTIVE_HAS_5_KEY_RESULT);

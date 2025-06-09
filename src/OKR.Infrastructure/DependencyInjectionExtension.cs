@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OKR.Domain.Repositories;
+using OKR.Domain.Repositories.Actions;
 using OKR.Domain.Repositories.KeyResults;
 using OKR.Domain.Repositories.Objectives;
 using OKR.Infrastructure.DataAccess;
@@ -36,6 +37,10 @@ public static class DependencyInjectionExtension
     services.AddScoped<IKeyResultReadOnlyRepository, KeyResultRepository>();
     services.AddScoped<IKeyResultWriteOnlyRepository, KeyResultRepository>();
     services.AddScoped<IKeyResultUpdateOnlyRepository, KeyResultRepository>();
+
+    services.AddScoped<IActionReadOnlyRepository, ActionRepository>();
+    services.AddScoped<IActionUpdateOnlyRepository, ActionRepository>();
+    services.AddScoped<IActionWriteOnlyRepository, ActionRepository>();
 
     services.AddScoped<IUnitOfWork, UnitOfWork>();
   }

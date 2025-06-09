@@ -8,4 +8,5 @@ internal class OkrDbContext : DbContext
   public OkrDbContext(DbContextOptions options) : base(options: options) { }
   public DbSet<ObjectiveEntity> Objectives { get; set; }
   public DbSet<KeyResultEntity> KeyResults { get; set; }
+  public DbSet<ActionEntity> Actions { get; set; }
 }
