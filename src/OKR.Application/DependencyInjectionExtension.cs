@@ -5,6 +5,7 @@ using OKR.Application.UseCases.Action.GetActionByKeyResultId;
 using OKR.Application.UseCases.Action.Register;
 using OKR.Application.UseCases.Action.Update;
 using OKR.Application.UseCases.Action.UpdateProgress;
+using OKR.Application.UseCases.Feedback.Register;
 using OKR.Application.UseCases.KeyResult.Delete;
 using OKR.Application.UseCases.KeyResult.GetById;
 using OKR.Application.UseCases.KeyResult.Register;
@@ -48,5 +49,7 @@ public static class DependencyInjectionExtension
     services.AddScoped<IDeleteActionUseCase, DeleteActionUseCase>();
     services.AddScoped<IUpdateActionUseCase, UpdateActionUseCase>();
     services.AddScoped<IUpdateProgressActionUseCase, UpdateProgressActionUseCase>();
+
+    services.AddScoped<IRegisterFeedbackUseCase, RegisterFeedbackUseCase>();
   }
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.Actions;
+using OKR.Domain.Repositories.Feedbacks;
 using OKR.Domain.Repositories.KeyResults;
 using OKR.Domain.Repositories.Objectives;
 using OKR.Infrastructure.DataAccess;
@@ -41,6 +42,10 @@ public static class DependencyInjectionExtension
     services.AddScoped<IActionReadOnlyRepository, ActionRepository>();
     services.AddScoped<IActionUpdateOnlyRepository, ActionRepository>();
     services.AddScoped<IActionWriteOnlyRepository, ActionRepository>();
+
+    services.AddScoped<IFeedbackReadOnlyRepository, FeedbackRepository>();
+    services.AddScoped<IFeedbackUpdateOnlyRepository, FeedbackRepository>();
+    services.AddScoped<IFeedbackWriteOnlyRepository, FeedbackRepository>();
 
     services.AddScoped<IUnitOfWork, UnitOfWork>();
   }

@@ -9,4 +9,5 @@ internal class OkrDbContext : DbContext
   public DbSet<ObjectiveEntity> Objectives { get; set; }
   public DbSet<KeyResultEntity> KeyResults { get; set; }
   public DbSet<ActionEntity> Actions { get; set; }
+  public DbSet<FeedbackEntity> Feedbacks { get; set; }
 }

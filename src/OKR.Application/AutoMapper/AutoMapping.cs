@@ -19,6 +19,7 @@ public class AutoMapping : Profile
     CreateMap<RequestUpdateObjectiveJson, ObjectiveEntity>();
     CreateMap<RequestRegisterKeyResultJson, KeyResultEntity>();
     CreateMap<RequestRegisterActionJson, ActionEntity>();
+    CreateMap<RequestRegisterFeedbackJson, FeedbackEntity>();
   }
 
   private void EntityToResponse()
@@ -26,5 +27,6 @@ public class AutoMapping : Profile
     CreateMap<ObjectiveEntity, ResponseObjectiveJson>();
     CreateMap<KeyResultEntity, ResponseKeyResultJson>();
     CreateMap<ActionEntity, ResponseActionJson>();
+    CreateMap<FeedbackEntity, ResponseFeedbackJson>();
   }
 }

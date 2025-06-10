@@ -18,6 +18,11 @@ internal class ActionRepository : IActionReadOnlyRepository, IActionUpdateOnlyRe
     return await _context.Actions.Where(x => x.KeyResultId == KeyResultId).ToListAsync();
   }
 
+  async Task<ActionEntity?> IActionReadOnlyRepository.GetActionById(Guid actionId)
+  {
+    return await _context.Actions.FirstOrDefaultAsync(action => action.Id == actionId);
+  }
+
   public async Task<ActionEntity?> GetById(Guid actionId)
   {
     return await _context.Actions.FirstOrDefaultAsync(x => x.Id == actionId);
