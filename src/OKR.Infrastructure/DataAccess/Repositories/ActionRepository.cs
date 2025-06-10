@@ -13,14 +13,14 @@ internal class ActionRepository : IActionReadOnlyRepository, IActionUpdateOnlyRe
     _context = context;
   }
 
-  public async Task<List<ActionEntity>?> GetActionsByKeyResultId(Guid KeyResultId)
+  public async Task<List<ActionEntity>?> GetActionsByKeyResultId(Guid keyResultId)
   {
-    return await _context.Actions.Where(x => x.KeyResultId == KeyResultId).ToListAsync();
+    return await _context.Actions.Where(action => action.KeyResultId == keyResultId).ToListAsync();
   }
 
   public async Task<List<ActionEntity>?> GetActionsByDateRange(DateTime dateStart, DateTime dateEnd)
   {
-    return await _context.Actions.Where(action => action.EndDate >= dateStart && action.StartDate <= dateEnd).ToListAsync();
+    return await _context.Actions.Where(action => action.EndDate.Date >= dateStart.Date && action.StartDate.Date <= dateEnd.Date).ToListAsync();
   }
 
   async Task<ActionEntity?> IActionReadOnlyRepository.GetActionById(Guid actionId)

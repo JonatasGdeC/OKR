@@ -18,9 +18,9 @@ internal class FeedbackRepository : IFeedbackReadOnlyRepository, IFeedbackUpdate
     return await _context.Feedbacks.Where(feedback => feedback.ActionId == actionId).ToListAsync();
   }
 
-  public async Task<List<FeedbackEntity>?> GetFeedbacksByDate(DateTime date)
+  public async Task<List<FeedbackEntity>?> GetFeedbacksByDateRange(DateTime dateStart, DateTime dateEnd)
   {
-    return await _context.Feedbacks.Where(feedback => feedback.Date == date).ToListAsync();
+    return await _context.Feedbacks.Where(feedback => feedback.Date.Date >= dateStart.Date && feedback.Date.Date <= dateEnd.Date).ToListAsync();
   }
 
   async Task<FeedbackEntity?> IFeedbackUpdateOnlyRepository.GetFeedbackById(Guid feedbackId)
