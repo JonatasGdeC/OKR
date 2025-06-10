@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OKR.Application.UseCases.Action.Delete;
 using OKR.Application.UseCases.Action.GetActionByKeyResultId;
+using OKR.Application.UseCases.Action.GetActionsByDateRange;
 using OKR.Application.UseCases.Action.Register;
 using OKR.Application.UseCases.Action.Update;
 using OKR.Application.UseCases.Action.UpdateProgress;
@@ -30,6 +31,16 @@ public class ActionController : ControllerBase
   public async Task<IActionResult> GetActionsByKeyResultId([FromServices] IGetActionsByKeyResultIdUseCase useCase, [FromRoute] Guid keyResultId)
   {
     var response = await useCase.Execute(keyResultId: keyResultId);
+    return Ok(value: response);
+  }
+
+  [HttpGet]
+  [Route(template: "{dateStart}/{dateEnd}")]
+  [ProducesResponseType(type: typeof(ResponseListActionJson), statusCode: StatusCodes.Status200OK)]
+  [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+  public async Task<IActionResult> GetActionsByDateRange([FromServices] IGetActionsByDateRangeUseCase useCase, [FromRoute] DateTime dateStart, [FromRoute] DateTime dateEnd)
+  {
+    var response = await useCase.Execute(dateStart, dateEnd);
     return Ok(value: response);
   }
 

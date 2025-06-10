@@ -18,6 +18,11 @@ internal class ActionRepository : IActionReadOnlyRepository, IActionUpdateOnlyRe
     return await _context.Actions.Where(x => x.KeyResultId == KeyResultId).ToListAsync();
   }
 
+  public async Task<List<ActionEntity>?> GetActionsByDateRange(DateTime dateStart, DateTime dateEnd)
+  {
+    return await _context.Actions.Where(action => action.EndDate >= dateStart && action.StartDate <= dateEnd).ToListAsync();
+  }
+
   async Task<ActionEntity?> IActionReadOnlyRepository.GetActionById(Guid actionId)
   {
     return await _context.Actions.FirstOrDefaultAsync(action => action.Id == actionId);
@@ -25,7 +30,7 @@ internal class ActionRepository : IActionReadOnlyRepository, IActionUpdateOnlyRe
 
   public async Task<ActionEntity?> GetById(Guid actionId)
   {
-    return await _context.Actions.FirstOrDefaultAsync(x => x.Id == actionId);
+    return await _context.Actions.FirstOrDefaultAsync(action => action.Id == actionId);
   }
 
   public async Task Update(ActionEntity action)
