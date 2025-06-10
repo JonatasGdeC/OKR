@@ -6,4 +6,5 @@ public interface IActionUpdateOnlyRepository
 {
   Task<ActionEntity?> GetById(Guid actionId);
   Task Update(ActionEntity action);
+  Task UpdateProgress(ActionEntity action, int progress);
 }

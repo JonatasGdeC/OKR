@@ -28,6 +28,12 @@ internal class ActionRepository : IActionReadOnlyRepository, IActionUpdateOnlyRe
     _context.Actions.Update(action);
   }
 
+  public async Task UpdateProgress(ActionEntity action, int progress)
+  {
+    action.CurrentProgress = progress;
+    _context.Actions.Update(action);
+  }
+
   public async Task Add(ActionEntity action)
   {
     await _context.Actions.AddAsync(action);
