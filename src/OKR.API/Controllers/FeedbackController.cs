@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OKR.Application.UseCases.Feedback.GetFeedbacksByAction;
 using OKR.Application.UseCases.Feedback.Register;
 using OKR.Communication.Requests;
 using OKR.Communication.Response;
@@ -17,5 +18,15 @@ public class FeedbackController : ControllerBase
   {
     var response = await useCase.Execute(request: request);
     return Created(uri: string.Empty, value: response);
+  }
+
+  [HttpGet]
+  [Route(template: "{actionId}")]
+  [ProducesResponseType(type: typeof(ResponseListFeedbacksJson), statusCode: StatusCodes.Status200OK)]
+  [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+  public async Task<IActionResult> GetFeedbacksByActionId([FromServices] IGetFeedbacksByActionIdUseCase useCase, [FromRoute] Guid actionId)
+  {
+    var response = await useCase.Execute(actionId: actionId);
+    return Ok(value: response);
   }
 }
