@@ -6,9 +6,11 @@ using OKR.Application.UseCases.Action.GetActionsByDateRange;
 using OKR.Application.UseCases.Action.Register;
 using OKR.Application.UseCases.Action.Update;
 using OKR.Application.UseCases.Action.UpdateProgress;
+using OKR.Application.UseCases.Feedback.Delete;
 using OKR.Application.UseCases.Feedback.GetFeedbacksByAction;
 using OKR.Application.UseCases.Feedback.GetFeedbacksByDateRange;
 using OKR.Application.UseCases.Feedback.Register;
+using OKR.Application.UseCases.Feedback.Update;
 using OKR.Application.UseCases.KeyResult.Delete;
 using OKR.Application.UseCases.KeyResult.GetById;
 using OKR.Application.UseCases.KeyResult.Register;
@@ -57,5 +59,7 @@ public static class DependencyInjectionExtension
     services.AddScoped<IRegisterFeedbackUseCase, RegisterFeedbackUseCase>();
     services.AddScoped<IGetFeedbacksByActionIdUseCase, GetFeedbacksByActionIdUseCase>();
     services.AddScoped<IGetFeedbacksByDateRangeUseCase, GetFeedbacksByDateRangeUseCase>();
+    services.AddScoped<IUpdateFeedbackUseCase, UpdateFeedbackUseCase>();
+    services.AddScoped<IDeleteFeedbackUseCase, DeleteFeedbackUseCase>();
   }
 }

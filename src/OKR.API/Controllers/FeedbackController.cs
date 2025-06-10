@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using OKR.Application.UseCases.Feedback.Delete;
 using OKR.Application.UseCases.Feedback.GetFeedbacksByAction;
 using OKR.Application.UseCases.Feedback.GetFeedbacksByDateRange;
 using OKR.Application.UseCases.Feedback.Register;
+using OKR.Application.UseCases.Feedback.Update;
 using OKR.Communication.Requests;
 using OKR.Communication.Response;
 
@@ -39,5 +41,25 @@ public class FeedbackController : ControllerBase
   {
     var response = await useCase.Execute(dateStart, dateEnd);
     return Ok(value: response);
+  }
+
+  [HttpPut]
+  [Route(template: "{feedbackId}")]
+  [ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
+  [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status400BadRequest)]
+  public async Task<IActionResult> UpdateFeedback([FromServices] IUpdateFeedbackUseCase useCase, [FromRoute] Guid feedbackId, RequestRegisterFeedbackJson request)
+  {
+    await useCase.Execute(feedbackId, request);
+    return NoContent();
+  }
+
+  [HttpDelete]
+  [Route(template: "{feedbackId}")]
+  [ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
+  [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status404NotFound)]
+  public async Task<IActionResult> DeleteKeyResult([FromServices] IDeleteFeedbackUseCase useCase, [FromRoute] Guid feedbackId)
+  {
+    await useCase.Execute(feedbackId: feedbackId);
+    return NoContent();
   }
 }
