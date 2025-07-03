@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Migrations;
 using OKR.API.Filters;
 using OKR.API.Middleware;
 using OKR.Application;
@@ -28,4 +29,13 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<CultureMiddleware>();
 app.UseHttpsRedirection();
 app.MapControllers();
+
+await MigrateDatabase();
+
 app.Run();
+
+async Task MigrateDatabase()
+{
+  await using var scope = app.Services.CreateAsyncScope();
+  await DataBaseMigration.MigrateDatabase(scope.ServiceProvider);
+}
