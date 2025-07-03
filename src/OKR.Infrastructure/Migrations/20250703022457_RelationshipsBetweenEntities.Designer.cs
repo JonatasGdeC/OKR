@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OKR.Infrastructure.DataAccess;
 
@@ -11,9 +12,11 @@ using OKR.Infrastructure.DataAccess;
 namespace OKR.Infrastructure.Migrations
 {
     [DbContext(typeof(OkrDbContext))]
-    partial class OkrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250703022457_RelationshipsBetweenEntities")]
+    partial class RelationshipsBetweenEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
