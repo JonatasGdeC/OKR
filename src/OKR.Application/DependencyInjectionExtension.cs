@@ -20,6 +20,7 @@ using OKR.Application.UseCases.Objetives.GetAll;
 using OKR.Application.UseCases.Objetives.GetByQuarterAndYear;
 using OKR.Application.UseCases.Objetives.Register;
 using OKR.Application.UseCases.Objetives.Update;
+using OKR.Application.UseCases.User.Register;
 
 namespace OKR.Application;
 
@@ -61,5 +62,7 @@ public static class DependencyInjectionExtension
     services.AddScoped<IGetFeedbacksByDateRangeUseCase, GetFeedbacksByDateRangeUseCase>();
     services.AddScoped<IUpdateFeedbackUseCase, UpdateFeedbackUseCase>();
     services.AddScoped<IDeleteFeedbackUseCase, DeleteFeedbackUseCase>();
+
+    services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
   }
 }
