@@ -7,4 +7,6 @@ public class ObjectiveEntity
   public int Year { get; init; }
   public int Quarter { get; init; }
   public DateTime CreateDate = DateTime.UtcNow;
+  public Guid UserId { get; set; }
+  public required User User { get; set; }
 }

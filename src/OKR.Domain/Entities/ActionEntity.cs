@@ -10,4 +10,6 @@ public class ActionEntity
   public DateTime StartDate { get; init; }
   public DateTime EndDate { get; init; }
   public int CurrentProgress { get; set; }
+  public Guid UserId { get; set; }
+  public required User User { get; set; }
 }

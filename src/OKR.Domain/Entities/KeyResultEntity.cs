@@ -7,4 +7,6 @@ public class KeyResultEntity
   public int NumberKr { get; init; }
   public required string Title { get; init; }
   public DateTime CreateDate = DateTime.UtcNow;
+  public Guid UserId { get; set; }
+  public required User User { get; set; }
 }
