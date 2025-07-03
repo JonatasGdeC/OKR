@@ -1,6 +1,7 @@
 using AutoMapper;
 using OKR.Communication.Requests;
 using OKR.Communication.Response;
+using OKR.Domain.Secury;
 using OKR.Exception.ExceptionBase;
 
 namespace OKR.Application.UseCases.User.Register;
@@ -8,10 +9,12 @@ namespace OKR.Application.UseCases.User.Register;
 public class RegisterUserUseCase : IRegisterUserUseCase
 {
   private readonly IMapper _mapper;
+  private readonly IPasswordEncripter  _passwordEncripter;
 
-  public RegisterUserUseCase(IMapper mapper)
+  public RegisterUserUseCase(IMapper mapper, IPasswordEncripter passwordEncripter)
   {
     _mapper = mapper;
+    _passwordEncripter = passwordEncripter;
   }
 
   public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
@@ -19,6 +22,8 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     Validate(request);
 
     var user = _mapper.Map<Domain.Entities.User>(request);
+    user.Password = _passwordEncripter.Encrypt(request.Password);
+
     return new ResponseRegisteredUserJson
     {
       Name = user.Name,

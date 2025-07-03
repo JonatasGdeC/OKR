@@ -6,6 +6,7 @@ using OKR.Domain.Repositories.Actions;
 using OKR.Domain.Repositories.Feedbacks;
 using OKR.Domain.Repositories.KeyResults;
 using OKR.Domain.Repositories.Objectives;
+using OKR.Domain.Secury;
 using OKR.Infrastructure.DataAccess;
 using OKR.Infrastructure.DataAccess.Repositories;
 
@@ -17,6 +18,8 @@ public static class DependencyInjectionExtension
   {
     AddDbContext(services: services, configuration: configuration);
     AddRepositories(services: services);
+
+    services.AddScoped<IPasswordEncripter, Secury.BCrypt>();
   }
 
   private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
