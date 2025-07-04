@@ -6,6 +6,7 @@ using OKR.Domain.Repositories.Actions;
 using OKR.Domain.Repositories.Feedbacks;
 using OKR.Domain.Repositories.KeyResults;
 using OKR.Domain.Repositories.Objectives;
+using OKR.Domain.Repositories.User;
 using OKR.Domain.Secury;
 using OKR.Infrastructure.DataAccess;
 using OKR.Infrastructure.DataAccess.Repositories;
@@ -49,6 +50,8 @@ public static class DependencyInjectionExtension
     services.AddScoped<IFeedbackReadOnlyRepository, FeedbackRepository>();
     services.AddScoped<IFeedbackUpdateOnlyRepository, FeedbackRepository>();
     services.AddScoped<IFeedbackWriteOnlyRepository, FeedbackRepository>();
+
+    services.AddScoped<IUserReadOnlyRepository, UserRepository>();
 
     services.AddScoped<IUnitOfWork, UnitOfWork>();
   }

@@ -10,4 +10,5 @@ internal class OkrDbContext : DbContext
   public DbSet<KeyResultEntity> KeyResults { get; set; }
   public DbSet<ActionEntity> Actions { get; set; }
   public DbSet<FeedbackEntity> Feedbacks { get; set; }
+  public DbSet<User> Users  { get; set; }
 }
