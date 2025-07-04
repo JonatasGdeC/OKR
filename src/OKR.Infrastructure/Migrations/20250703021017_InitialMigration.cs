@@ -15,7 +15,7 @@ namespace OKR.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -30,7 +30,7 @@ namespace OKR.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -57,7 +57,7 @@ namespace OKR.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Actions_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -80,7 +80,7 @@ namespace OKR.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Feedbacks_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -103,7 +103,7 @@ namespace OKR.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_KeyResults_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -126,7 +126,7 @@ namespace OKR.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Objectives_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -169,7 +169,7 @@ namespace OKR.Infrastructure.Migrations
                 name: "Objectives");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

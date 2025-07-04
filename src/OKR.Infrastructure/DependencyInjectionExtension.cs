@@ -52,6 +52,7 @@ public static class DependencyInjectionExtension
     services.AddScoped<IFeedbackWriteOnlyRepository, FeedbackRepository>();
 
     services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+    services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
 
     services.AddScoped<IUnitOfWork, UnitOfWork>();
   }
