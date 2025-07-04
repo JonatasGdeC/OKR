@@ -8,8 +8,10 @@ using OKR.Domain.Repositories.KeyResults;
 using OKR.Domain.Repositories.Objectives;
 using OKR.Domain.Repositories.User;
 using OKR.Domain.Secury;
+using OKR.Domain.Tokens;
 using OKR.Infrastructure.DataAccess;
 using OKR.Infrastructure.DataAccess.Repositories;
+using OKR.Infrastructure.Secury.Token;
 
 namespace OKR.Infrastructure;
 
@@ -19,8 +21,17 @@ public static class DependencyInjectionExtension
   {
     AddDbContext(services: services, configuration: configuration);
     AddRepositories(services: services);
+    AddToken(services: services, configuration: configuration);
 
-    services.AddScoped<IPasswordEncripter, Secury.BCrypt>();
+    services.AddScoped<IPasswordEncripter, Secury.Cryptography.BCrypt>();
+  }
+
+  private static void AddToken(IServiceCollection services, IConfiguration configuration)
+  {
+    var expiration = configuration.GetValue<uint>("Settings:JWT:ExpiresMinutes");
+    var signingKey = configuration.GetValue<string>("Settings:JWT:SigningKey");
+
+    services.AddScoped<IAccessTokenGenerator>(config => new JwtTokenGenerator(expiration, signingKey!));
   }
 
   private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

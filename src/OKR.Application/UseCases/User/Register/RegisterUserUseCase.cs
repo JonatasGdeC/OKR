@@ -5,6 +5,7 @@ using OKR.Communication.Response;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.User;
 using OKR.Domain.Secury;
+using OKR.Domain.Tokens;
 using OKR.Exception.ExceptionBase;
 
 namespace OKR.Application.UseCases.User.Register;
@@ -12,18 +13,22 @@ namespace OKR.Application.UseCases.User.Register;
 public class RegisterUserUseCase : IRegisterUserUseCase
 {
   private readonly IMapper _mapper;
-  private readonly IPasswordEncripter  _passwordEncripter;
+  private readonly IPasswordEncripter _passwordEncripter;
   private readonly IUserReadOnlyRepository _userReadOnlyRepository;
   private readonly IUserWriteOnlyRepository _userWriteOnlyRepository;
   private readonly IUnitOfWork _unitOfWork;
+  private readonly IAccessTokenGenerator _accessTokenGenerator;
 
-  public RegisterUserUseCase(IMapper mapper, IPasswordEncripter passwordEncripter, IUserReadOnlyRepository userReadOnlyRepository, IUserWriteOnlyRepository userWriteOnlyRepository, IUnitOfWork unitOfWork)
+  public RegisterUserUseCase(IMapper mapper, IPasswordEncripter passwordEncripter,
+    IUserReadOnlyRepository userReadOnlyRepository, IUserWriteOnlyRepository userWriteOnlyRepository,
+    IUnitOfWork unitOfWork, IAccessTokenGenerator accessTokenGenerator)
   {
     _mapper = mapper;
     _passwordEncripter = passwordEncripter;
     _userReadOnlyRepository = userReadOnlyRepository;
     _userWriteOnlyRepository = userWriteOnlyRepository;
     _unitOfWork = unitOfWork;
+    _accessTokenGenerator = accessTokenGenerator;
   }
 
   public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
@@ -40,6 +45,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     {
       Name = user.Name,
       Email = user.Email,
+      Token = _accessTokenGenerator.Generate(user)
     };
   }
 
@@ -50,7 +56,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
     if (emailExist)
     {
-      result.Errors.Add(new ValidationFailure(String.Empty,"Email already exists."));
+      result.Errors.Add(new ValidationFailure(String.Empty, "Email already exists."));
     }
 
     if (!result.IsValid)
