@@ -4,9 +4,6 @@ namespace OKR.Infrastructure.Secury.Cryptography;
 
 internal class BCrypt : IPasswordEncripter
 {
-  public string Encrypt(string password)
-  {
-    string passworHash = BC.HashPassword(password);
-    return passworHash;
-  }
+  public string Encrypt(string password) => BC.HashPassword(password);
+  public bool Verify(string password, string hashedPassword) => BC.Verify(password, hashedPassword);
 }

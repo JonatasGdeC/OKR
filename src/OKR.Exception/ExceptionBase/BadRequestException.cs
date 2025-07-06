@@ -4,7 +4,7 @@ namespace OKR.Exception.ExceptionBase;
 
 public class BadRequestException : OkrException
 {
-  public BadRequestException(string message) : base(messagr: message)
+  public BadRequestException(string message) : base(message: message)
   {
   }
 

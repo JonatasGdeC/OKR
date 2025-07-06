@@ -5,7 +5,7 @@ namespace OKR.Exception.ExceptionBase;
 public class ErrorOnValidationException : OkrException
 {
   private readonly List<string> _errors;
-  public ErrorOnValidationException(List<string> errorsMessages) : base(messagr: string.Empty)
+  public ErrorOnValidationException(List<string> errorsMessages) : base(message: string.Empty)
   {
     _errors = errorsMessages;
   }

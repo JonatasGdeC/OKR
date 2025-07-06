@@ -15,6 +15,7 @@ using OKR.Application.UseCases.KeyResult.Delete;
 using OKR.Application.UseCases.KeyResult.GetById;
 using OKR.Application.UseCases.KeyResult.Register;
 using OKR.Application.UseCases.KeyResult.Update;
+using OKR.Application.UseCases.Login.DoLogin;
 using OKR.Application.UseCases.Objetives.Delete;
 using OKR.Application.UseCases.Objetives.GetAll;
 using OKR.Application.UseCases.Objetives.GetByQuarterAndYear;
@@ -64,5 +65,7 @@ public static class DependencyInjectionExtension
     services.AddScoped<IDeleteFeedbackUseCase, DeleteFeedbackUseCase>();
 
     services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+
+    services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
   }
 }
