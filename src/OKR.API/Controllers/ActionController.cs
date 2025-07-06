@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OKR.Application.UseCases.Action.Delete;
 using OKR.Application.UseCases.Action.GetActionByKeyResultId;
@@ -12,6 +13,7 @@ namespace OKR.API.Controllers;
 
 [Route(template: "api/[controller]")]
 [ApiController]
+[Authorize]
 public class ActionController : ControllerBase
 {
   [HttpPost]

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OKR.Application.UseCases.Objetives.Delete;
 using OKR.Application.UseCases.Objetives.GetAll;
@@ -11,9 +12,9 @@ namespace OKR.API.Controllers;
 
 [Route(template: "api/[controller]")]
 [ApiController]
+[Authorize]
 public class ObjectiveController : ControllerBase
 {
-
   [HttpPost]
   [ProducesResponseType(type: typeof(ResponseObjectiveJson), statusCode: StatusCodes.Status201Created)]
   [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status400BadRequest)]

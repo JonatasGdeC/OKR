@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OKR.Application.UseCases.Feedback.Delete;
 using OKR.Application.UseCases.Feedback.GetFeedbacksByAction;
@@ -11,6 +12,7 @@ namespace OKR.API.Controllers;
 
 [Route(template: "api/[controller]")]
 [ApiController]
+[Authorize]
 public class FeedbackController : ControllerBase
 {
   [HttpPost]
