@@ -76,8 +76,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<CultureMiddleware>();
 app.UseHttpsRedirection();
-app.UseAuthorization();
+
 app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 await MigrateDatabase();
