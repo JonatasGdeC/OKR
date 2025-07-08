@@ -16,7 +16,7 @@ public class ExceptionFilter : IExceptionFilter
     }
     else
     {
-      ThrowUnknowError(context: context);
+      // ThrowUnknowError(context: context);
     }
   }
 

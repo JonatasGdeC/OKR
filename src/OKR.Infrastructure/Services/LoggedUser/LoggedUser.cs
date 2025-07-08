@@ -23,8 +23,7 @@ internal class LoggedUser : ILoggedUser
     string token = _tokenProvider.TokenOnRequest();
     var tokenHandler = new JwtSecurityTokenHandler();
     var jwtSecurityToken = tokenHandler.ReadJwtToken(token);
-    var identifiear = jwtSecurityToken.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sid).Value;
-
+    var identifiear = jwtSecurityToken.Claims.First().Value;
     return await _context.Users.AsNoTracking().FirstAsync(user => user.Id == Guid.Parse(identifiear));
   }
 }
