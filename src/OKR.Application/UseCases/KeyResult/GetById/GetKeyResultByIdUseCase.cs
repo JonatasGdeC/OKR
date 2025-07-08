@@ -3,6 +3,7 @@ using OKR.Communication.Response;
 using OKR.Domain.Entities;
 using OKR.Domain.Repositories.KeyResults;
 using OKR.Domain.Repositories.Objectives;
+using OKR.Domain.Services.LoggedUser;
 using OKR.Exception;
 using OKR.Exception.ExceptionBase;
 
@@ -13,17 +14,20 @@ public class GetKeyResultByObjectiveId : IGetKeyResultByIdUseCase
   private readonly IObjetiveUpdateOnlyRepository _repositoryObjetive;
   private readonly IKeyResultReadOnlyRepository _repositoryKeyResult;
   private readonly IMapper _mapper;
+  private readonly ILoggedUser _loggedUser;
 
-  public GetKeyResultByObjectiveId(IObjetiveUpdateOnlyRepository repositoryObjetive, IKeyResultReadOnlyRepository repositoryKeyResult, IMapper mapper)
+  public GetKeyResultByObjectiveId(IObjetiveUpdateOnlyRepository repositoryObjetive, IKeyResultReadOnlyRepository repositoryKeyResult, IMapper mapper, ILoggedUser loggedUser)
   {
     _repositoryObjetive = repositoryObjetive;
     _repositoryKeyResult = repositoryKeyResult;
     _mapper = mapper;
+    _loggedUser = loggedUser;
   }
 
   public async Task<ResponseListKeyResultJson> Execute(Guid id)
   {
-    ObjectiveEntity? objetive = await _repositoryObjetive.GetById(id: id);
+    var loggedUser = await _loggedUser.Get();
+    ObjectiveEntity? objetive = await _repositoryObjetive.GetById(loggedUser: loggedUser, id: id);
     if (objetive == null)
     {
       throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);

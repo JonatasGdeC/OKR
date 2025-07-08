@@ -18,19 +18,24 @@ internal class ObjectiveRepository : IObjectiveWriteOnlyRepository, IObjetiveRea
     await _context.Objectives.AddAsync(entity: objective);
   }
 
-  public async Task<List<ObjectiveEntity>> GetAll()
+  public async Task<List<ObjectiveEntity>> GetAll(User loggedUser)
   {
-    return await _context.Objectives.AsNoTracking().ToListAsync();
+    return await _context.Objectives.AsNoTracking().Where(objective => objective.UserId == loggedUser.Id).ToListAsync();
   }
 
-  public async Task<List<ObjectiveEntity>> GetByQuarterAndYear(int quarter, int year)
+  public async Task<List<ObjectiveEntity>> GetByQuarterAndYear(User loggedUser, int quarter, int year)
   {
-    return await _context.Objectives.Where(x => x.Quarter == quarter && x.Year == year).ToListAsync();
+    return await _context.Objectives.AsNoTracking().Where(objective => objective.Quarter == quarter && objective.Year == year && objective.UserId == loggedUser.Id).ToListAsync();
+  }
+
+  async Task<ObjectiveEntity?> IObjetiveReadOnlyRepository.GetById(User loggedUser, Guid id)
+  {
+    return await _context.Objectives.AsNoTracking().FirstOrDefaultAsync(objective => objective.Id == id && objective.UserId == loggedUser.Id);
   }
 
   async Task<ObjectiveEntity?> IObjetiveUpdateOnlyRepository.GetById(User loggedUser, Guid id)
   {
-    return await _context.Objectives.FirstOrDefaultAsync(predicate: objective => objective.Id == id && objective.UserId == loggedUser.Id);
+    return await _context.Objectives.AsNoTracking().FirstOrDefaultAsync(predicate: objective => objective.Id == id && objective.UserId == loggedUser.Id);
   }
 
   public async Task Update(ObjectiveEntity objective)
@@ -38,16 +43,9 @@ internal class ObjectiveRepository : IObjectiveWriteOnlyRepository, IObjetiveRea
     _context.Objectives.Update(entity: objective);
   }
 
-  public async Task<bool> Delete(Guid id)
+  public async Task Delete(Guid id)
   {
     ObjectiveEntity? result = await _context.Objectives.FirstOrDefaultAsync(predicate: objetive => objetive.Id == id);
-
-    if (result == null)
-    {
-      return false;
-    }
-
     _context.Objectives.Remove(entity: result);
-    return true;
   }
 }

@@ -5,6 +5,7 @@ using OKR.Domain.Entities;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.KeyResults;
 using OKR.Domain.Repositories.Objectives;
+using OKR.Domain.Services.LoggedUser;
 using OKR.Exception;
 using OKR.Exception.ExceptionBase;
 
@@ -17,22 +18,24 @@ public class RegisterKeyResultUseCase : IRegisterKeyResultUseCase
   private readonly IKeyResultWriteOnlyRepository _repositoryWriteKeyResult;
   private readonly IMapper _mapper;
   private readonly IUnitOfWork _unitOfWork;
+  private readonly ILoggedUser _loggedUser;
 
-  public RegisterKeyResultUseCase(IObjetiveUpdateOnlyRepository repositoryObjetive, IKeyResultReadOnlyRepository repositoryReadKeyResult, IKeyResultWriteOnlyRepository repositoryKeyResult, IMapper mapper, IUnitOfWork unitOfWork)
+  public RegisterKeyResultUseCase(IObjetiveUpdateOnlyRepository repositoryObjetive, IKeyResultReadOnlyRepository repositoryReadKeyResult, IKeyResultWriteOnlyRepository repositoryKeyResult, IMapper mapper, IUnitOfWork unitOfWork, ILoggedUser loggedUser)
   {
     _repositoryObjetive = repositoryObjetive;
     _repositoryReadKeyResult = repositoryReadKeyResult;
     _repositoryWriteKeyResult = repositoryKeyResult;
     _mapper = mapper;
     _unitOfWork = unitOfWork;
+    _loggedUser = loggedUser;
   }
 
 
   public async Task<ResponseKeyResultJson> Execute(RequestRegisterKeyResultJson requestRegister)
   {
     Validate(requestRegister: requestRegister);
-
-    ObjectiveEntity? objective = await _repositoryObjetive.GetById(id: requestRegister.ObjectiveId);
+    var loggedUser = await _loggedUser.Get();
+    ObjectiveEntity? objective = await _repositoryObjetive.GetById(loggedUser: loggedUser, id: requestRegister.ObjectiveId);
     if (objective == null)
     {
       throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);

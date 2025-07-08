@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OKR.Application.UseCases.User.Register;
 using OKR.Communication.Requests;
 using OKR.Communication.Response;
+using OKR.Domain.Enums;
 
 namespace OKR.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = Roles.Admin)]
 public class UserController : ControllerBase
 {
   [HttpPost]
