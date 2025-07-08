@@ -25,6 +25,7 @@ public class RegisterObjectiveUseCase : IRegisterObjectiveUseCase
   {
     Validate(requestRegister: requestRegister);
     var entity = _mapper.Map<ObjectiveEntity>(source: requestRegister);
+
     await _repository.Add(objective: entity);
     await _unitOfWork.Commit();
     return _mapper.Map<ResponseObjectiveJson>(source: entity);

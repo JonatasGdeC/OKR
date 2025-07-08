@@ -1,4 +1,4 @@
-namespace OKR.Domain.Secury;
+namespace OKR.Domain.Secury.Cryptography;
 
 public interface IPasswordEncripter
 {

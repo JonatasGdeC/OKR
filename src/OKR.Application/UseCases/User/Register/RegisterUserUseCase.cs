@@ -5,6 +5,7 @@ using OKR.Communication.Response;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.User;
 using OKR.Domain.Secury;
+using OKR.Domain.Secury.Cryptography;
 using OKR.Domain.Tokens;
 using OKR.Exception.ExceptionBase;
 

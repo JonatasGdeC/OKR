@@ -8,10 +8,13 @@ using OKR.Domain.Repositories.KeyResults;
 using OKR.Domain.Repositories.Objectives;
 using OKR.Domain.Repositories.User;
 using OKR.Domain.Secury;
+using OKR.Domain.Secury.Cryptography;
+using OKR.Domain.Services.LoggedUser;
 using OKR.Domain.Tokens;
 using OKR.Infrastructure.DataAccess;
 using OKR.Infrastructure.DataAccess.Repositories;
 using OKR.Infrastructure.Secury.Token;
+using OKR.Infrastructure.Services.LoggedUser;
 
 namespace OKR.Infrastructure;
 
@@ -24,6 +27,7 @@ public static class DependencyInjectionExtension
     AddToken(services: services, configuration: configuration);
 
     services.AddScoped<IPasswordEncripter, Secury.Cryptography.BCrypt>();
+    services.AddScoped<ILoggedUser, LoggedUser>();
   }
 
   private static void AddToken(IServiceCollection services, IConfiguration configuration)

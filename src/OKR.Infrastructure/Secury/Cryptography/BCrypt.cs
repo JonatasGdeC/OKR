@@ -1,4 +1,5 @@
 using OKR.Domain.Secury;
+using OKR.Domain.Secury.Cryptography;
 using BC = BCrypt.Net.BCrypt;
 namespace OKR.Infrastructure.Secury.Cryptography;
 

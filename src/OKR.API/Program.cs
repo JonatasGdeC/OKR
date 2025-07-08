@@ -4,7 +4,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OKR.API.Filters;
 using OKR.API.Middleware;
+using OKR.API.Token;
 using OKR.Application;
+using OKR.Domain.Secury.Tokens;
 using OKR.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args: args);
@@ -49,6 +51,9 @@ builder.Services.AddMvc(setupAction: options => options.Filters.Add(filterType: 
 
 builder.Services.AddInfrastructure(configuration: builder.Configuration);
 builder.Services.AddApplication();
+
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAuthentication(config =>
 {
