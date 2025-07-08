@@ -28,9 +28,9 @@ internal class ObjectiveRepository : IObjectiveWriteOnlyRepository, IObjetiveRea
     return await _context.Objectives.Where(x => x.Quarter == quarter && x.Year == year).ToListAsync();
   }
 
-  async Task<ObjectiveEntity?> IObjetiveUpdateOnlyRepository.GetById(Guid id)
+  async Task<ObjectiveEntity?> IObjetiveUpdateOnlyRepository.GetById(User loggedUser, Guid id)
   {
-    return await _context.Objectives.FirstOrDefaultAsync(predicate: objective => objective.Id == id);
+    return await _context.Objectives.FirstOrDefaultAsync(predicate: objective => objective.Id == id && objective.UserId == loggedUser.Id);
   }
 
   public async Task Update(ObjectiveEntity objective)

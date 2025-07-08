@@ -4,6 +4,6 @@ namespace OKR.Domain.Repositories.Objectives;
 
 public interface IObjetiveUpdateOnlyRepository
 {
-  Task<ObjectiveEntity?> GetById(Guid id);
+  Task<ObjectiveEntity?> GetById(Entities.User loggedUser, Guid id);
   Task Update(ObjectiveEntity objective);
 }

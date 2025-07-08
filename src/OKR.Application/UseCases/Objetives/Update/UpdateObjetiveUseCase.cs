@@ -3,6 +3,7 @@ using OKR.Communication.Requests;
 using OKR.Domain.Entities;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.Objectives;
+using OKR.Domain.Services.LoggedUser;
 using OKR.Exception;
 using OKR.Exception.ExceptionBase;
 
@@ -13,19 +14,22 @@ public class UpdateObjetiveUseCase : IUpdateObjetiveUseCase
   private readonly IUnitOfWork _unitOfWork;
   private readonly IMapper _mapper;
   private readonly IObjetiveUpdateOnlyRepository _repository;
+  private readonly ILoggedUser _loggedUser;
 
-  public UpdateObjetiveUseCase(IUnitOfWork unitOfWork, IMapper mapper, IObjetiveUpdateOnlyRepository repository)
+  public UpdateObjetiveUseCase(IUnitOfWork unitOfWork, IMapper mapper, IObjetiveUpdateOnlyRepository repository, ILoggedUser loggedUser)
   {
     _unitOfWork = unitOfWork;
     _mapper = mapper;
     _repository = repository;
+    _loggedUser = loggedUser;
   }
 
   public async Task Execute(Guid id, RequestUpdateObjectiveJson requestRegister)
   {
     Validate(requestRegister: requestRegister);
 
-    ObjectiveEntity? objetive = await _repository.GetById(id: id);
+    var loggedUser = await _loggedUser.Get();
+    ObjectiveEntity? objetive = await _repository.GetById(loggedUser: loggedUser, id: id);
 
     if (objetive == null)
     {
