@@ -14,6 +14,6 @@ public class HttpContextTokenValue : ITokenProvider
   public string TokenOnRequest()
   {
     string autohrization = _httpContextAccessor.HttpContext!.Request.Headers.Authorization.ToString();
-    return autohrization.Split(" ")[1];
+    return autohrization.Split(separator: " ")[1];
   }
 }

@@ -22,7 +22,7 @@ public class GetAllObjectiveUseCase : IGetAllObjectiveUseCase
   public async Task<ResponseListObjectiveJson> Execute()
   {
     var loggedUser = await _loggedUser.Get();
-    List<ObjectiveEntity> result = await _repository.GetAll(loggedUser);
+    List<ObjectiveEntity> result = await _repository.GetAll(loggedUser: loggedUser);
 
     return new ResponseListObjectiveJson
     {

@@ -22,27 +22,27 @@ public class JwtTokenGenerator : IAccessTokenGenerator
   {
     var claims = new List<Claim>()
     {
-      new Claim(ClaimTypes.Sid, user.Id.ToString()),
-      new Claim(ClaimTypes.Name, user.Name),
-      new Claim(ClaimTypes.Role, user.Role)
+      new Claim(type: ClaimTypes.Sid, value: user.Id.ToString()),
+      new Claim(type: ClaimTypes.Name, value: user.Name),
+      new Claim(type: ClaimTypes.Role, value: user.Role)
     };
 
     var tokenDescription = new SecurityTokenDescriptor
     {
-      Expires = DateTime.UtcNow.AddMinutes(_expirationTimeMinutes),
-      SigningCredentials = new SigningCredentials(SecuryKey(), SecurityAlgorithms.HmacSha256),
-      Subject = new ClaimsIdentity(claims)
+      Expires = DateTime.UtcNow.AddMinutes(value: _expirationTimeMinutes),
+      SigningCredentials = new SigningCredentials(key: SecuryKey(), algorithm: SecurityAlgorithms.HmacSha256),
+      Subject = new ClaimsIdentity(claims: claims)
     };
 
     var tokenHandler = new JwtSecurityTokenHandler();
-    var token = tokenHandler.CreateToken(tokenDescription);
-    return tokenHandler.WriteToken(token);
+    var token = tokenHandler.CreateToken(tokenDescriptor: tokenDescription);
+    return tokenHandler.WriteToken(token: token);
   }
 
   private SymmetricSecurityKey SecuryKey()
   {
-    var key = Encoding.UTF8.GetBytes(_signingKey);
+    var key = Encoding.UTF8.GetBytes(s: _signingKey);
 
-    return new SymmetricSecurityKey(key);
+    return new SymmetricSecurityKey(key: key);
   }
 }

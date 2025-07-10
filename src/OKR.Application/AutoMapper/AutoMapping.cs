@@ -20,7 +20,7 @@ public class AutoMapping : Profile
     CreateMap<RequestRegisterKeyResultJson, KeyResultEntity>();
     CreateMap<RequestRegisterActionJson, ActionEntity>();
     CreateMap<RequestRegisterFeedbackJson, FeedbackEntity>();
-    CreateMap<RequestRegisterUserJson, User>().ForMember(dest => dest.Password, opt => opt.Ignore());
+    CreateMap<RequestRegisterUserJson, User>().ForMember(destinationMember: dest => dest.Password, memberOptions: opt => opt.Ignore());
   }
 
   private void EntityToResponse()

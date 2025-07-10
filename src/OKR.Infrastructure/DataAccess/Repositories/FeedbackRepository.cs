@@ -13,24 +13,29 @@ internal class FeedbackRepository : IFeedbackReadOnlyRepository, IFeedbackUpdate
     _context = context;
   }
 
-  public async Task<List<FeedbackEntity>?> GetFeedbacksByActionId(Guid actionId)
+  public async Task<List<FeedbackEntity>?> GetFeedbacksByActionId(User loggedUser, Guid actionId)
   {
-    return await _context.Feedbacks.Where(feedback => feedback.ActionId == actionId).ToListAsync();
+    return await _context.Feedbacks.Where(predicate: feedback => feedback.ActionId == actionId && feedback.UserId == loggedUser.Id).ToListAsync();
   }
 
-  public async Task<List<FeedbackEntity>?> GetFeedbacksByDateRange(DateTime dateStart, DateTime dateEnd)
+  async Task<FeedbackEntity?> IFeedbackReadOnlyRepository.GetFeedbackById(User loggedUser, Guid feedbackId)
   {
-    return await _context.Feedbacks.Where(feedback => feedback.Date.Date >= dateStart.Date && feedback.Date.Date <= dateEnd.Date).ToListAsync();
+    return await _context.Feedbacks.AsNoTracking().FirstOrDefaultAsync(predicate: feedback => feedback.Id == feedbackId && feedback.UserId == loggedUser.Id);
   }
 
-  async Task<FeedbackEntity?> IFeedbackUpdateOnlyRepository.GetFeedbackById(Guid feedbackId)
+  public async Task<List<FeedbackEntity>?> GetFeedbacksByDateRange(User loggedUser, DateTime dateStart, DateTime dateEnd)
   {
-    return await _context.Feedbacks.FirstOrDefaultAsync(feedback => feedback.Id == feedbackId);
+    return await _context.Feedbacks.Where(predicate: feedback => feedback.Date.Date >= dateStart.Date && feedback.Date.Date <= dateEnd.Date && feedback.UserId == loggedUser.Id).ToListAsync();
+  }
+
+  async Task<FeedbackEntity?> IFeedbackUpdateOnlyRepository.GetFeedbackById(User loggedUser, Guid feedbackId)
+  {
+    return await _context.Feedbacks.FirstOrDefaultAsync(predicate: feedback => feedback.Id == feedbackId && feedback.UserId == loggedUser.Id);
   }
 
   public async Task Update(FeedbackEntity feedback)
   {
-    _context.Feedbacks.Update(feedback);
+    _context.Feedbacks.Update(entity: feedback);
   }
 
   public async Task AddFeedback(FeedbackEntity feedback)
@@ -38,16 +43,8 @@ internal class FeedbackRepository : IFeedbackReadOnlyRepository, IFeedbackUpdate
     await _context.Feedbacks.AddAsync(entity: feedback);
   }
 
-  public async Task<bool> DeleteFeedback(Guid feedbackId)
+  public async Task DeleteFeedback(FeedbackEntity feedback)
   {
-    FeedbackEntity? result = await _context.Feedbacks.FirstOrDefaultAsync(predicate: feedback => feedback.Id == feedbackId);
-
-    if (result == null)
-    {
-      return false;
-    }
-
-    _context.Feedbacks.Remove(entity: result);
-    return true;
+    _context.Feedbacks.Remove(entity: feedback);
   }
 }

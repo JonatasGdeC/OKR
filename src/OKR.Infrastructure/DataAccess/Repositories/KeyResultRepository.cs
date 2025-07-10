@@ -18,32 +18,25 @@ internal class KeyResultRepository : IKeyResultReadOnlyRepository, IKeyResultWri
     await _context.KeyResults.AddAsync(entity: keyResult);
   }
 
-  public async Task<bool> Delete(Guid id)
+  public async Task Delete(Guid id)
   {
     KeyResultEntity? result = await _context.KeyResults.FirstOrDefaultAsync(predicate: keyResult => keyResult.Id == id);
-
-    if (result == null)
-    {
-      return false;
-    }
-
-    _context.KeyResults.Remove(entity: result);
-    return true;
+    _context.KeyResults.Remove(entity: result!);
   }
 
-  public async Task<List<KeyResultEntity>?> GetKeyResultsByObjectiveId(Guid id)
+  public async Task<List<KeyResultEntity>?> GetKeyResultsByObjectiveId(User loggedUser, Guid id)
   {
-    return await _context.KeyResults.Where(predicate: kr => kr.ObjectiveId == id).AsNoTracking().ToListAsync();
+    return await _context.KeyResults.AsNoTracking().Where(predicate: kr => kr.ObjectiveId == id && kr.UserId == loggedUser.Id).ToListAsync();
   }
 
-  async Task<KeyResultEntity?> IKeyResultReadOnlyRepository.GetById(Guid id)
+  async Task<KeyResultEntity?> IKeyResultReadOnlyRepository.GetById(User loggedUser, Guid id)
   {
-    return await _context.KeyResults.AsNoTracking().FirstOrDefaultAsync(kerResult => kerResult.Id == id);
+    return await _context.KeyResults.AsNoTracking().FirstOrDefaultAsync(predicate: kerResult => kerResult.Id == id && kerResult.UserId == loggedUser.Id);
   }
 
-  async Task<KeyResultEntity?> IKeyResultUpdateOnlyRepository.GetById(Guid id)
+  async Task<KeyResultEntity?> IKeyResultUpdateOnlyRepository.GetById(User loggedUser, Guid id)
   {
-    return await _context.KeyResults.FirstOrDefaultAsync(predicate: keyResult => keyResult.Id == id);
+    return await _context.KeyResults.FirstOrDefaultAsync(predicate: keyResult => keyResult.Id == id && keyResult.UserId == loggedUser.Id);
   }
 
   public async Task Update(KeyResultEntity keyResult)

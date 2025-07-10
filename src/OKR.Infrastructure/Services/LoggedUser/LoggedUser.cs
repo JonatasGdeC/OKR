@@ -22,8 +22,8 @@ internal class LoggedUser : ILoggedUser
   {
     string token = _tokenProvider.TokenOnRequest();
     var tokenHandler = new JwtSecurityTokenHandler();
-    var jwtSecurityToken = tokenHandler.ReadJwtToken(token);
+    var jwtSecurityToken = tokenHandler.ReadJwtToken(token: token);
     var identifiear = jwtSecurityToken.Claims.First().Value;
-    return await _context.Users.AsNoTracking().FirstAsync(user => user.Id == Guid.Parse(identifiear));
+    return await _context.Users.AsNoTracking().FirstAsync(predicate: user => user.Id == Guid.Parse(identifiear));
   }
 }

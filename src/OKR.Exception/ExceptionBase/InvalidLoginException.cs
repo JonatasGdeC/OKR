@@ -4,7 +4,7 @@ namespace OKR.Exception.ExceptionBase;
 
 public class InvalidLoginException : OkrException
 {
-  public InvalidLoginException() : base("Email or password is incorrect!")
+  public InvalidLoginException() : base(message: "Email or password is incorrect!")
   {
   }
 

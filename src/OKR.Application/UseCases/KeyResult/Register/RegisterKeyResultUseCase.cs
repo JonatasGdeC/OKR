@@ -41,7 +41,7 @@ public class RegisterKeyResultUseCase : IRegisterKeyResultUseCase
       throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
     }
 
-    List<KeyResultEntity> list = await _repositoryReadKeyResult.GetKeyResultsByObjectiveId(id: requestRegister.ObjectiveId) ?? [];
+    List<KeyResultEntity> list = await _repositoryReadKeyResult.GetKeyResultsByObjectiveId(loggedUser: loggedUser, id: requestRegister.ObjectiveId) ?? [];
     bool listWasCountFive = list.Count == 5;
 
     if (listWasCountFive)
@@ -62,6 +62,7 @@ public class RegisterKeyResultUseCase : IRegisterKeyResultUseCase
     }
 
     var entity = _mapper.Map<KeyResultEntity>(source: requestRegister);
+    entity.UserId = loggedUser.Id;
     await _repositoryWriteKeyResult.Add(keyResult: entity);
     await _unitOfWork.Commit();
     return _mapper.Map<ResponseKeyResultJson>(source: entity);

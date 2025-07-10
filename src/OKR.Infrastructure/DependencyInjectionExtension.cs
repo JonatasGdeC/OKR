@@ -32,10 +32,10 @@ public static class DependencyInjectionExtension
 
   private static void AddToken(IServiceCollection services, IConfiguration configuration)
   {
-    var expiration = configuration.GetValue<uint>("Settings:JWT:ExpiresMinutes");
-    var signingKey = configuration.GetValue<string>("Settings:JWT:SigningKey");
+    var expiration = configuration.GetValue<uint>(key: "Settings:JWT:ExpiresMinutes");
+    var signingKey = configuration.GetValue<string>(key: "Settings:JWT:SigningKey");
 
-    services.AddScoped<IAccessTokenGenerator>(config => new JwtTokenGenerator(expiration, signingKey!));
+    services.AddScoped<IAccessTokenGenerator>(implementationFactory: config => new JwtTokenGenerator(expirationTimeMinutes: expiration, signingKey: signingKey!));
   }
 
   private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

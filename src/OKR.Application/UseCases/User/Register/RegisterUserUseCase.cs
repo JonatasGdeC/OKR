@@ -34,36 +34,36 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
   public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
   {
-    await Validate(request);
+    await Validate(request: request);
 
-    var user = _mapper.Map<Domain.Entities.User>(request);
-    user.Password = _passwordEncripter.Encrypt(request.Password);
+    var user = _mapper.Map<Domain.Entities.User>(source: request);
+    user.Password = _passwordEncripter.Encrypt(password: request.Password);
 
-    await _userWriteOnlyRepository.Add(user);
+    await _userWriteOnlyRepository.Add(user: user);
     await _unitOfWork.Commit();
 
     return new ResponseRegisteredUserJson
     {
       Name = user.Name,
       Email = user.Email,
-      Token = _accessTokenGenerator.Generate(user)
+      Token = _accessTokenGenerator.Generate(user: user)
     };
   }
 
   private async Task Validate(RequestRegisterUserJson request)
   {
-    var result = new RegisterUserValidator().Validate(request);
-    bool emailExist = await _userReadOnlyRepository.ExistActiveUserWithEmail(request.Email);
+    var result = new RegisterUserValidator().Validate(instance: request);
+    bool emailExist = await _userReadOnlyRepository.ExistActiveUserWithEmail(email: request.Email);
 
     if (emailExist)
     {
-      result.Errors.Add(new ValidationFailure(String.Empty, "Email already exists."));
+      result.Errors.Add(item: new ValidationFailure(propertyName: String.Empty, errorMessage: "Email already exists."));
     }
 
     if (!result.IsValid)
     {
-      var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-      throw new ErrorOnValidationException(errorMessages);
+      var errorMessages = result.Errors.Select(selector: x => x.ErrorMessage).ToList();
+      throw new ErrorOnValidationException(errorsMessages: errorMessages);
     }
   }
 }

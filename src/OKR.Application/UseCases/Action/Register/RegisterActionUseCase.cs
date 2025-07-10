@@ -5,6 +5,7 @@ using OKR.Domain.Entities;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.Actions;
 using OKR.Domain.Repositories.KeyResults;
+using OKR.Domain.Services.LoggedUser;
 using OKR.Exception;
 using OKR.Exception.ExceptionBase;
 
@@ -16,26 +17,29 @@ public class RegisterActionUseCase : IRegisterActionUseCase
   private readonly IActionWriteOnlyRepository _actionRepository;
   private readonly IMapper _mapper;
   private readonly IUnitOfWork _unitOfWork;
+  private readonly ILoggedUser _loggedUser;
 
-  public RegisterActionUseCase(IKeyResultReadOnlyRepository keyResultRepository, IActionWriteOnlyRepository actionRepository, IMapper mapper, IUnitOfWork unitOfWork)
+  public RegisterActionUseCase(IKeyResultReadOnlyRepository keyResultRepository, IActionWriteOnlyRepository actionRepository, IMapper mapper, IUnitOfWork unitOfWork, ILoggedUser loggedUser)
   {
     _keyResultRepository = keyResultRepository;
     _actionRepository = actionRepository;
     _mapper = mapper;
     _unitOfWork = unitOfWork;
+    _loggedUser = loggedUser;
   }
 
   public async Task<ResponseActionJson> Execute(RequestRegisterActionJson requestRegister)
   {
     Validator(requestRegister: requestRegister);
-
-    KeyResultEntity? keyResult = await _keyResultRepository.GetById(id: requestRegister.KeyResultId);
+    var loggedUser = await _loggedUser.Get();
+    KeyResultEntity? keyResult = await _keyResultRepository.GetById(loggedUser: loggedUser, id: requestRegister.KeyResultId);
     if (keyResult == null)
     {
       throw new NotFoundException(message: ResourceErrorMessage.KEY_RESULT_NOT_FOUND);
     }
 
     var entity = _mapper.Map<ActionEntity>(source: requestRegister);
+    entity.UserId = loggedUser.Id;
 
     await _actionRepository.Add(action: entity);
     await _unitOfWork.Commit();

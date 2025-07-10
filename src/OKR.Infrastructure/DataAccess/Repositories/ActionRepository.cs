@@ -13,52 +13,45 @@ internal class ActionRepository : IActionReadOnlyRepository, IActionUpdateOnlyRe
     _context = context;
   }
 
-  public async Task<List<ActionEntity>?> GetActionsByKeyResultId(Guid keyResultId)
+  public async Task<List<ActionEntity>?> GetActionsByKeyResultId(User loggedUser, Guid keyResultId)
   {
-    return await _context.Actions.Where(action => action.KeyResultId == keyResultId).ToListAsync();
+    return await _context.Actions.AsNoTracking().Where(predicate: action => action.KeyResultId == keyResultId && action.UserId == loggedUser.Id).ToListAsync();
   }
 
-  public async Task<List<ActionEntity>?> GetActionsByDateRange(DateTime dateStart, DateTime dateEnd)
+  public async Task<List<ActionEntity>?> GetActionsByDateRange(User loggedUser, DateTime dateStart, DateTime dateEnd)
   {
-    return await _context.Actions.Where(action => action.EndDate.Date >= dateStart.Date && action.StartDate.Date <= dateEnd.Date).ToListAsync();
+    return await _context.Actions.AsNoTracking().Where(predicate: action => action.EndDate.Date >= dateStart.Date && action.StartDate.Date <= dateEnd.Date && action.UserId == loggedUser.Id).ToListAsync();
   }
 
-  async Task<ActionEntity?> IActionReadOnlyRepository.GetActionById(Guid actionId)
+  async Task<ActionEntity?> IActionReadOnlyRepository.GetActionById(User loggedUser, Guid actionId)
   {
-    return await _context.Actions.FirstOrDefaultAsync(action => action.Id == actionId);
+    return await _context.Actions.FirstOrDefaultAsync(predicate: action => action.Id == actionId && action.UserId == loggedUser.Id);
   }
 
-  public async Task<ActionEntity?> GetById(Guid actionId)
+  async Task<ActionEntity?> IActionUpdateOnlyRepository.GetById(User loggedUser, Guid actionId)
   {
-    return await _context.Actions.FirstOrDefaultAsync(action => action.Id == actionId);
+    return await _context.Actions.FirstOrDefaultAsync(predicate: action => action.Id == actionId && action.UserId == loggedUser.Id);
   }
 
   public async Task Update(ActionEntity action)
   {
-    _context.Actions.Update(action);
+    _context.Actions.Update(entity: action);
   }
 
   public async Task UpdateProgress(ActionEntity action, int progress)
   {
     action.CurrentProgress = progress;
-    _context.Actions.Update(action);
+    _context.Actions.Update(entity: action);
   }
 
   public async Task Add(ActionEntity action)
   {
-    await _context.Actions.AddAsync(action);
+    await _context.Actions.AddAsync(entity: action);
   }
 
-  public async Task<bool> Delete(Guid id)
+  public async Task Delete(Guid id)
   {
     ActionEntity? result = await _context.Actions.FirstOrDefaultAsync(predicate: action => action.Id == id);
-
-    if (result == null)
-    {
-      return false;
-    }
-
-    _context.Actions.Remove(entity: result);
-    return true;
+    _context.Actions.Remove(entity: result!);
   }
 }

@@ -25,7 +25,7 @@ public class DeleteObjectiveUseCase : IDeleteObjectiveUseCase
   public async Task Execute(Guid id)
   {
     var loggedUser = await _loggedUser.Get();
-    ObjectiveEntity? objective = await _objectiveReadOnlyRepository.GetById(loggedUser, id);
+    ObjectiveEntity? objective = await _objectiveReadOnlyRepository.GetById(loggedUser: loggedUser, id: id);
 
     if (objective == null)
     {

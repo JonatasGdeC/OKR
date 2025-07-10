@@ -3,6 +3,7 @@ using OKR.Communication.Requests;
 using OKR.Domain.Entities;
 using OKR.Domain.Repositories;
 using OKR.Domain.Repositories.KeyResults;
+using OKR.Domain.Services.LoggedUser;
 using OKR.Exception;
 using OKR.Exception.ExceptionBase;
 
@@ -13,19 +14,22 @@ public class UpdateKeyResultUseCase : IUpdateKeyResultUseCase
   private readonly IKeyResultUpdateOnlyRepository _repository;
   private readonly IUnitOfWork _unitOfWork;
   private readonly IMapper _mapper;
+  private readonly ILoggedUser _loggedUser;
 
-  public UpdateKeyResultUseCase(IKeyResultUpdateOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
+  public UpdateKeyResultUseCase(IKeyResultUpdateOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper, ILoggedUser loggedUser)
   {
     _repository = repository;
     _unitOfWork = unitOfWork;
     _mapper = mapper;
+    _loggedUser = loggedUser;
   }
 
   public async Task Execute(Guid id, RequestRegisterKeyResultJson request)
   {
     Validate(requestRegister: request);
+    var loggedUser = await _loggedUser.Get();
 
-    KeyResultEntity? keyResult = await _repository.GetById(id: id);
+    KeyResultEntity? keyResult = await _repository.GetById(loggedUser: loggedUser, id: id);
 
     if (keyResult == null)
     {

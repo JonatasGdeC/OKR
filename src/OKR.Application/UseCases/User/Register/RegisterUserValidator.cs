@@ -7,8 +7,8 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
 {
   public RegisterUserValidator()
   {
-    RuleFor(user => user.Name).NotEmpty().WithMessage("Name is required.");
-    RuleFor(user => user.Email).NotEmpty().WithMessage("Email is required.").EmailAddress().WithMessage("Email is invalid.");
-    RuleFor(user => user.Password).SetValidator(new PasswordValidator<RequestRegisterUserJson>());
+    RuleFor(expression: user => user.Name).NotEmpty().WithMessage(errorMessage: "Name is required.");
+    RuleFor(expression: user => user.Email).NotEmpty().WithMessage(errorMessage: "Email is required.").EmailAddress().WithMessage(errorMessage: "Email is invalid.");
+    RuleFor(expression: user => user.Password).SetValidator(validator: new PasswordValidator<RequestRegisterUserJson>());
   }
 }

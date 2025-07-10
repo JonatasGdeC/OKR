@@ -42,7 +42,7 @@ public class ActionController : ControllerBase
   [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
   public async Task<IActionResult> GetActionsByDateRange([FromServices] IGetActionsByDateRangeUseCase useCase, [FromRoute] DateTime dateStart, [FromRoute] DateTime dateEnd)
   {
-    var response = await useCase.Execute(dateStart, dateEnd);
+    var response = await useCase.Execute(startDate: dateStart, endDate: dateEnd);
     return Ok(value: response);
   }
 

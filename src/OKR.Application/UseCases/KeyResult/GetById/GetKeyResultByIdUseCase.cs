@@ -33,7 +33,7 @@ public class GetKeyResultByObjectiveId : IGetKeyResultByIdUseCase
       throw new NotFoundException(message: ResourceErrorMessage.OBJECTIVE_NOT_FOUND);
     }
 
-    List<KeyResultEntity>? response = await _repositoryKeyResult.GetKeyResultsByObjectiveId(id: id);
+    List<KeyResultEntity>? response = await _repositoryKeyResult.GetKeyResultsByObjectiveId(loggedUser: loggedUser, id: id);
     if (response == null)
     {
       throw new NotFoundException(message: ResourceErrorMessage.KEY_RESULT_NOT_FOUND);

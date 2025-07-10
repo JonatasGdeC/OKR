@@ -4,6 +4,6 @@ namespace OKR.Domain.Repositories.KeyResults;
 
 public interface IKeyResultUpdateOnlyRepository
 {
-  Task<KeyResultEntity?> GetById(Guid id);
+  Task<KeyResultEntity?> GetById(Entities.User loggedUser, Guid id);
   Task Update(KeyResultEntity keyResult);
 }

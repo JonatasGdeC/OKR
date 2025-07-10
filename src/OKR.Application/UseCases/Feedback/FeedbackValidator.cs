@@ -8,7 +8,7 @@ public class FeedbackValidator : AbstractValidator<RequestRegisterFeedbackJson>
 {
   public FeedbackValidator()
   {
-    RuleFor(expression: feedback => feedback.Description).NotEmpty().WithMessage(ResourceErrorMessage.DESCRIPTION_IS_REQUIRED).MinimumLength(3).WithMessage(ResourceErrorMessage.DESCRIPTION_MINIMUM_CHARACTERS).MaximumLength(1000).WithMessage(ResourceErrorMessage.DESCRIPTION_MAXIMUM_CHARACTERS);
-    RuleFor(feedback => feedback.Date).Must(date => date.Date >= DateTime.Today.AddDays(-2) && date.Date <= DateTime.Today).WithMessage("The feedback date must be today, yesterday, or the day before yesterday.");
+    RuleFor(expression: feedback => feedback.Description).NotEmpty().WithMessage(errorMessage: ResourceErrorMessage.DESCRIPTION_IS_REQUIRED).MinimumLength(minimumLength: 3).WithMessage(errorMessage: ResourceErrorMessage.DESCRIPTION_MINIMUM_CHARACTERS).MaximumLength(maximumLength: 1000).WithMessage(errorMessage: ResourceErrorMessage.DESCRIPTION_MAXIMUM_CHARACTERS);
+    RuleFor(expression: feedback => feedback.Date).Must(predicate: date => date.Date >= DateTime.Today.AddDays(value: -2) && date.Date <= DateTime.Today).WithMessage(errorMessage: "The feedback date must be today, yesterday, or the day before yesterday.");
   }
 }

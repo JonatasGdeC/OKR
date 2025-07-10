@@ -17,39 +17,39 @@ public class PasswordValidator<T> : PropertyValidator<T, string>
 
   public override bool IsValid(ValidationContext<T> context, string password)
   {
-    if (string.IsNullOrEmpty(password))
+    if (string.IsNullOrEmpty(value: password))
     {
-      context.MessageFormatter.AppendArgument(ErrorMessage, "Password is required.");
+      context.MessageFormatter.AppendArgument(name: ErrorMessage, value: "Password is required.");
       return false;
     }
 
     if (password.Length < 8)
     {
-      context.MessageFormatter.AppendArgument(ErrorMessage, "Password must be at least 8 characters.");
+      context.MessageFormatter.AppendArgument(name: ErrorMessage, value: "Password must be at least 8 characters.");
       return false;
     }
 
-    if (!Regex.IsMatch(password, @"[A-Z]+"))
+    if (!Regex.IsMatch(input: password, pattern: @"[A-Z]+"))
     {
-      context.MessageFormatter.AppendArgument(ErrorMessage, "Password must have a capital letter.");
+      context.MessageFormatter.AppendArgument(name: ErrorMessage, value: "Password must have a capital letter.");
       return false;
     }
 
-    if (!Regex.IsMatch(password, @"[a-z]+"))
+    if (!Regex.IsMatch(input: password, pattern: @"[a-z]+"))
     {
-      context.MessageFormatter.AppendArgument(ErrorMessage, "Password must have a lowercase letter.");
+      context.MessageFormatter.AppendArgument(name: ErrorMessage, value: "Password must have a lowercase letter.");
       return false;
     }
 
-    if (!Regex.IsMatch(password, @"[0-9]+"))
+    if (!Regex.IsMatch(input: password, pattern: @"[0-9]+"))
     {
-      context.MessageFormatter.AppendArgument(ErrorMessage, "Password must have a digit");
+      context.MessageFormatter.AppendArgument(name: ErrorMessage, value: "Password must have a digit");
       return false;
     }
 
-    if (!Regex.IsMatch(password, @"[\w\.\-]+"))
+    if (!Regex.IsMatch(input: password, pattern: @"[\w\.\-]+"))
     {
-      context.MessageFormatter.AppendArgument(ErrorMessage, "Password must have a special character.");
+      context.MessageFormatter.AppendArgument(name: ErrorMessage, value: "Password must have a special character.");
       return false;
     }
 

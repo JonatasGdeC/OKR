@@ -4,6 +4,7 @@ namespace OKR.Domain.Repositories.Feedbacks;
 
 public interface IFeedbackReadOnlyRepository
 {
-  Task<List<FeedbackEntity>?> GetFeedbacksByActionId(Guid actionId);
-  Task<List<FeedbackEntity>?> GetFeedbacksByDateRange(DateTime dateStart, DateTime dateEnd);
+  Task<List<FeedbackEntity>?> GetFeedbacksByActionId(Entities.User loggedUser, Guid actionId);
+  Task<FeedbackEntity?> GetFeedbackById(Entities.User loggedUser, Guid feedbackId);
+  Task<List<FeedbackEntity>?> GetFeedbacksByDateRange(Entities.User loggedUser, DateTime dateStart, DateTime dateEnd);
 }

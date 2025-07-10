@@ -13,9 +13,9 @@ var builder = WebApplication.CreateBuilder(args: args);
 
 builder.Services.AddOpenApi();
 
-builder.Services.AddSwaggerGen(config =>
+builder.Services.AddSwaggerGen(setupAction: config =>
 {
-  config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+  config.AddSecurityDefinition(name: "Bearer", securityScheme: new OpenApiSecurityScheme
   {
     Name = "Authorization",
     Description = @"JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below. Example: 'Bearer 12345abcdef'",
@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen(config =>
     Type = SecuritySchemeType.ApiKey,
   });
 
-  config.AddSecurityRequirement(new OpenApiSecurityRequirement
+  config.AddSecurityRequirement(securityRequirement: new OpenApiSecurityRequirement
   {
     {
       new OpenApiSecurityScheme
@@ -55,18 +55,18 @@ builder.Services.AddApplication();
 builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddAuthentication(config =>
+builder.Services.AddAuthentication(configureOptions: config =>
 {
   config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
   config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(config =>
+}).AddJwtBearer(configureOptions: config =>
 {
   config.TokenValidationParameters = new TokenValidationParameters
   {
     ValidateIssuer = false,
     ValidateAudience = false,
-    ClockSkew = new TimeSpan(0),
-    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("Settings:JWT:SigningKey")!))
+    ClockSkew = new TimeSpan(ticks: 0),
+    IssuerSigningKey = new SymmetricSecurityKey(key: Encoding.UTF8.GetBytes(s: builder.Configuration.GetValue<string>(key: "Settings:JWT:SigningKey")!))
   };
 });
 
@@ -94,5 +94,5 @@ app.Run();
 async Task MigrateDatabase()
 {
   await using var scope = app.Services.CreateAsyncScope();
-  await DataBaseMigration.MigrateDatabase(scope.ServiceProvider);
+  await DataBaseMigration.MigrateDatabase(serviceProvider: scope.ServiceProvider);
 }

@@ -6,16 +6,16 @@ using OKR.Communication.Response;
 
 namespace OKR.API.Controllers;
 
-[Route("api/[controller]")]
+[Route(template: "api/[controller]")]
 [ApiController]
 public class LoginController : ControllerBase
 {
   [HttpPost]
-  [ProducesResponseType(typeof(ResponseRegisteredUserJson),StatusCodes.Status200OK)]
-  [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
+  [ProducesResponseType(type: typeof(ResponseRegisteredUserJson),statusCode: StatusCodes.Status200OK)]
+  [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status401Unauthorized)]
   public async Task<IActionResult> Login([FromServices] IDoLoginUseCase useCase, [FromBody] RequestLoginJson request)
   {
-    var response = await useCase.Execute(request);
-    return Ok(response);
+    var response = await useCase.Execute(request: request);
+    return Ok(value: response);
   }
 }

@@ -41,7 +41,7 @@ public class FeedbackController : ControllerBase
   [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
   public async Task<IActionResult> GetFeedbacksByDateRange([FromServices] IGetFeedbacksByDateRangeUseCase useCase, [FromRoute] DateTime dateStart, [FromRoute] DateTime dateEnd)
   {
-    var response = await useCase.Execute(dateStart, dateEnd);
+    var response = await useCase.Execute(dateStart: dateStart, dateEnd: dateEnd);
     return Ok(value: response);
   }
 
@@ -51,7 +51,7 @@ public class FeedbackController : ControllerBase
   [ProducesResponseType(type: typeof(ResponseErrorJson), statusCode: StatusCodes.Status400BadRequest)]
   public async Task<IActionResult> UpdateFeedback([FromServices] IUpdateFeedbackUseCase useCase, [FromRoute] Guid feedbackId, RequestRegisterFeedbackJson request)
   {
-    await useCase.Execute(feedbackId, request);
+    await useCase.Execute(feedbackId: feedbackId, request: request);
     return NoContent();
   }
 

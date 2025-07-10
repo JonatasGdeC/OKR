@@ -22,7 +22,7 @@ public class GetObjectiveByQuarterAndYear : IGetObjectiveByQuarterAndYear
   public async Task<ResponseListObjectiveJson> Execute(int quarter, int year)
   {
     var loggedUser = await _loggedUser.Get();
-    List<ObjectiveEntity> result = await _repository.GetByQuarterAndYear(loggedUser, quarter, year);
+    List<ObjectiveEntity> result = await _repository.GetByQuarterAndYear(loggedUser: loggedUser, quarter: quarter, year: year);
 
     return new ResponseListObjectiveJson
     {

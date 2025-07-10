@@ -8,6 +8,6 @@ public class UpdateProgressActionValidator : AbstractValidator<RequestUpdateProg
 {
   public UpdateProgressActionValidator()
   {
-    RuleFor(expression: action => action.CurrentProgress).Must(predicate: number => number >= 0 && number <= 100).WithMessage(ResourceErrorMessage.ACTION_PROGRESS_INVALID);
+    RuleFor(expression: action => action.CurrentProgress).Must(predicate: number => number >= 0 && number <= 100).WithMessage(errorMessage: ResourceErrorMessage.ACTION_PROGRESS_INVALID);
   }
 }

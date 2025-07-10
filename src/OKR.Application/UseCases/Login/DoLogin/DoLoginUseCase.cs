@@ -29,7 +29,7 @@ public class DoLoginUseCase : IDoLoginUseCase
       throw new InvalidLoginException();
     }
 
-    bool passwordMetch = _passwordEncripter.Verify(request.Password, user.Password);
+    bool passwordMetch = _passwordEncripter.Verify(password: request.Password, hashedPassword: user.Password);
     if (!passwordMetch)
     {
       throw new InvalidLoginException();
@@ -39,7 +39,7 @@ public class DoLoginUseCase : IDoLoginUseCase
     {
       Name = user.Name,
       Email = user.Email,
-      Token = _accessTokenGenerator.Generate(user)
+      Token = _accessTokenGenerator.Generate(user: user)
     };
   }
 }
