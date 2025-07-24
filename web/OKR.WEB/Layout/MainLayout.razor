@@ -1,0 +1,44 @@
+﻿@using OKR.WEB.Pages.Login
+@inherits LayoutComponentBase
+
+@if (!_isAuthenticated)
+{
+  <Login />
+}
+else
+{
+  <div class="page">
+    <div class="sidebar">
+      <NavMenu/>
+    </div>
+
+    <main>
+      <div class="top-row px-4">
+        <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+      </div>
+
+      <article class="content px-4">
+        @Body
+      </article>
+    </main>
+  </div>
+}
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@code {
+  private bool _isAuthenticated;
+
+  protected override async Task OnInitializedAsync()
+  {
+    var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    _isAuthenticated = authState.User.Identity?.IsAuthenticated == true;
+
+    AuthenticationStateProvider.AuthenticationStateChanged += async (task) =>
+    {
+      var state = await task;
+      _isAuthenticated = state.User.Identity?.IsAuthenticated == true;
+      StateHasChanged();
+    };
+  }
+}

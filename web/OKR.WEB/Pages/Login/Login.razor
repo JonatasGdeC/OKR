@@ -1,0 +1,50 @@
+@using System.ComponentModel.DataAnnotations
+@using OKR.Communication.Requests
+<h3>Login</h3>
+
+@if (!string.IsNullOrEmpty(_errorMessage))
+{
+  <p style="color:red">@_errorMessage</p>
+}
+
+<div>
+  <label>Email:</label>
+  <InputText @bind-Value="_loginModel.Email" />
+</div>
+
+<div>
+  <label>Senha:</label>
+  <InputText @bind-Value="_loginModel.Password" />
+</div>
+
+<button @onclick="HandleLogin">Entrar</button>
+
+
+@code {
+  private readonly LoginModel _loginModel = new();
+  private string? _errorMessage;
+
+  private async Task HandleLogin()
+  {
+    Console.WriteLine("Clicou e era pra entrar");
+    bool success = await LoginService.Login(email: _loginModel.Email, senha: _loginModel.Password);
+    if (success)
+    {
+      _errorMessage = "Sucesso!";
+      NavigationManager.Refresh();
+    }
+    else
+    {
+      _errorMessage = "Errorr!";
+    }
+  }
+
+  public class LoginModel
+  {
+    [Required]
+    public string Email { get; set; } = string.Empty;
+
+    [Required]
+    public string Password { get; set; } = string.Empty;
+  }
+}

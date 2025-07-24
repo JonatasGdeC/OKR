@@ -1,0 +1,44 @@
+﻿@page "/"
+@using OKR.Communication.Response
+@using OKR.WEB.Services
+@inject ObjectiveService ObjectiveService
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+@if (_isLoading)
+{
+  <p>Carregando...</p>
+}
+else
+{
+  if (_listObjectives.Any())
+  {
+    foreach (ResponseObjectiveJson objetive in _listObjectives)
+    {
+      <p>@objetive.Title</p>
+    }
+  }
+  else
+  {
+    <p>Sem objetivos</p>
+  }
+}
+
+@code {
+  private List<ResponseObjectiveJson> _listObjectives = [];
+  private bool _isLoading = true;
+
+  protected override async Task OnInitializedAsync()
+  {
+    var response = await ObjectiveService.GetAllAsync();
+    if (response != null)
+    {
+      _listObjectives = response.ListObjectives;
+    }
+
+    _isLoading = false;
+    StateHasChanged();
+  }
+}

@@ -13,6 +13,17 @@ var builder = WebApplication.CreateBuilder(args: args);
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("AllowBlazorClient", policy =>
+  {
+    policy
+      .WithOrigins("http://localhost:5058")
+      .AllowAnyHeader()
+      .AllowAnyMethod();
+  });
+});
+
 builder.Services.AddSwaggerGen(setupAction: config =>
 {
   config.AddSecurityDefinition(name: "Bearer", securityScheme: new OpenApiSecurityScheme
@@ -71,6 +82,8 @@ builder.Services.AddAuthentication(configureOptions: config =>
 });
 
 var app = builder.Build();
+
+app.UseCors("AllowBlazorClient");
 
 if (app.Environment.IsDevelopment())
 {
