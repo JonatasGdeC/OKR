@@ -1,0 +1,30 @@
+@if (_isLoading)
+{
+  <MudProgressCircular Color="Color.Primary" Size="Size.Medium" Indeterminate="true"/>
+}
+else
+{
+  <section class="list-key-result">
+    @if (ListAllKeyResult.Any())
+    {
+      <ul class="list-key-result__list">
+        @foreach (var keyResult in ListAllKeyResult)
+        {
+          <li class="list-key-result__list-item">
+            <MudChip T="string" Label="true">@($"KR{keyResult.NumberKr}")</MudChip>
+            <MudChip T="string" Label="true" Style="text-align: start">@keyResult.Title</MudChip>
+            <div class="list-key-result__list-item-buttons">
+              <MudIconButton OnClick="@(() => OpenDialogUpdateKeyResult(keyResult))" Icon="@Icons.Material.Filled.Edit" Color="Color.Default"/>
+              <MudIconButton OnClick="@(() => OpenDialogDeleteKeyResult(keyResult))" Icon="@Icons.Material.Filled.Delete" Color="Color.Error"/>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+    else
+    {
+      <MudText Typo="Typo.body1"><b>Nenhuma KR registrada!</b></MudText>
+    }
+    <MudButton OnClick="OpenDialogRegisterKeyResult" Color="Color.Primary" Variant="Variant.Filled" FullWidth="true">Adicionar KR</MudButton>
+  </section>
+}

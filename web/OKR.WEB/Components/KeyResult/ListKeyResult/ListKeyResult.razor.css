@@ -1,0 +1,23 @@
+.list-key-result {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  & > .list-key-result__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    & > .list-key-result__list-item {
+      display: grid;
+      grid-template-columns: 1fr 10fr 1fr;
+      align-items: center;
+      text-align: start;
+
+      & > .list-key-result__list-item-buttons {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

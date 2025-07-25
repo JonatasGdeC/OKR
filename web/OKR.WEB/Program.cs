@@ -29,5 +29,6 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().Cre
 builder.Services.AddScoped<AuthStatesProvider>();
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<ObjectiveService>();
+builder.Services.AddScoped<KeyResultService>();
 
 await builder.Build().RunAsync();
