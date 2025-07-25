@@ -1,0 +1,17 @@
+<section class="login">
+  <MudCard Class="pt-5 pb-5 w-25">
+    <MudCardContent>
+      <MudTextField Label="Email" Variant="Variant.Outlined" Required="true" RequiredError="Esse campo é obrigatório!"
+                    @bind-Value="_loginModel.Email" @bind-Value:after="@(() => _errorMessage = null)"
+                    Error="@(!string.IsNullOrEmpty(_errorMessage))" ErrorText="@_errorMessage"/>
+      <MudTextField Label="Senha" Variant="Variant.Outlined" Required="true" RequiredError="Esse campo é obrigatório!"
+                    @bind-Value="_loginModel.Password" @bind-Value:after="@(() => _errorMessage = null)"
+                    Error="@(!string.IsNullOrEmpty(_errorMessage))" ErrorText="@_errorMessage"
+                    InputType="InputType.Password"/>
+    </MudCardContent>
+    <MudCardActions>
+      <MudButton OnClick="HandleLogin" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true">Entrar
+      </MudButton>
+    </MudCardActions>
+  </MudCard>
+</section>

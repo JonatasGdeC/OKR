@@ -9,7 +9,16 @@
 @using OKR.WEB
 @using OKR.WEB.Layout
 @using Microsoft.AspNetCore.Components.Authorization
+@using OKR.WEB.Components.Objectives.ListObjectives
+@using OKR.WEB.Components.Login
 @using OKR.WEB.Services
+@using MudBlazor
+@using OKR.WEB.Layout.MainLayout
+@inherits LayoutComponentBase
+@using OKR.WEB.Layout.NavMenu
 
+@using OKR.Communication.Response
+@inject ObjectiveService ObjectiveService
 @inject NavigationManager NavigationManager;
 @inject LoginService LoginService
+@inject AuthenticationStateProvider AuthenticationStateProvider

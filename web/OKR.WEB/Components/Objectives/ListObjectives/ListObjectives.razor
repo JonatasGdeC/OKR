@@ -1,0 +1,30 @@
+@if (_isLoading)
+{
+  <MudProgressCircular Color="Color.Primary" Style="height:70px;width:70px;" Indeterminate="true" />
+}
+else
+{
+  if (_listObjectives.Any())
+  {
+    foreach (ResponseObjectiveJson objetive in _listObjectives)
+    {
+      <MudCard>
+        <MudCardHeader>
+          <CardHeaderContent>
+            <MudText Typo="Typo.h6">@objetive.Title</MudText>
+          </CardHeaderContent>
+          <CardHeaderActions>
+            <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+          </CardHeaderActions>
+        </MudCardHeader>
+        <MudCardContent>
+          <MudText>@($"Criado em {objetive.CreateDate:dd/MM/yyyy}")</MudText>
+        </MudCardContent>
+      </MudCard>
+    }
+  }
+  else
+  {
+    <p>Sem objetivos</p>
+  }
+}
