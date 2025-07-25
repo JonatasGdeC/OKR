@@ -1,24 +1,33 @@
 ﻿@using System.Net.Http
 @using System.Net.Http.Json
+@inherits LayoutComponentBase
+
+@* Blazor / Components *@
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 @using Microsoft.AspNetCore.Components.WebAssembly.Http
-@using Microsoft.JSInterop
-@using OKR.WEB
-@using OKR.WEB.Layout
 @using Microsoft.AspNetCore.Components.Authorization
-@using OKR.WEB.Components.Objectives.ListObjectives
-@using OKR.WEB.Components.Login
-@using OKR.WEB.Services
-@using MudBlazor
-@using OKR.WEB.Layout.MainLayout
-@inherits LayoutComponentBase
-@using OKR.WEB.Layout.NavMenu
+@using Microsoft.JSInterop
 
+@* Library *@
+@using MudBlazor
+
+@* Components *@
 @using OKR.Communication.Response
+@using OKR.WEB
+@using OKR.WEB.Services
+@using OKR.WEB.Layout
+@using OKR.WEB.Layout.MainLayout
+@using OKR.WEB.Layout.NavMenu
+@using OKR.WEB.Components.Login
+@using OKR.WEB.Components.Objectives.ListObjectives
+
+
+@* Injects *@
 @inject ObjectiveService ObjectiveService
-@inject NavigationManager NavigationManager;
 @inject LoginService LoginService
+@inject NavigationManager NavigationManager
+@inject IDialogService DialogService
 @inject AuthenticationStateProvider AuthenticationStateProvider

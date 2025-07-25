@@ -1,30 +1,38 @@
 @if (_isLoading)
 {
-  <MudProgressCircular Color="Color.Primary" Style="height:70px;width:70px;" Indeterminate="true" />
+  <MudProgressCircular Color="Color.Primary" Style="height:70px;width:70px;" Indeterminate="true"/>
 }
 else
 {
-  if (_listObjectives.Any())
-  {
-    foreach (ResponseObjectiveJson objetive in _listObjectives)
-    {
-      <MudCard>
-        <MudCardHeader>
-          <CardHeaderContent>
-            <MudText Typo="Typo.h6">@objetive.Title</MudText>
-          </CardHeaderContent>
-          <CardHeaderActions>
-            <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
-          </CardHeaderActions>
-        </MudCardHeader>
-        <MudCardContent>
-          <MudText>@($"Criado em {objetive.CreateDate:dd/MM/yyyy}")</MudText>
-        </MudCardContent>
-      </MudCard>
-    }
-  }
-  else
-  {
-    <p>Sem objetivos</p>
-  }
+  <section class="list-objectives">
+    <header class="list-objectives__header">
+      <MudButton OnClick="OpenDialogRegisterObjective" Color="Color.Primary" Variant="Variant.Filled">Novo objetivo</MudButton>
+    </header>
+    <div class="list-objectives__objetives">
+      @if (ListAllObjectives.Any())
+      {
+        foreach (ResponseObjectiveJson objetive in ListAllObjectives)
+        {
+          <MudCard>
+            <MudCardHeader>
+              <CardHeaderContent>
+                <MudText Typo="Typo.h6">@objetive.Title</MudText>
+              </CardHeaderContent>
+              <CardHeaderActions>
+                <MudIconButton OnClick="@(() => OpenDialogUpdateObjective(objetive))" Icon="@Icons.Material.Filled.Settings" Color="Color.Default"/>
+                <MudIconButton OnClick="@(() => OpenDialogDeleteObjective(objetive.Id))" Icon="@Icons.Material.Filled.Delete" Color="Color.Error"/>
+              </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardContent>
+              <MudText>@($"Criado em {objetive.CreateDate:dd/MM/yyyy}")</MudText>
+            </MudCardContent>
+          </MudCard>
+        }
+      }
+      else
+      {
+        <MudText Typo="Typo.h6">Nenhum objetivo registrado!</MudText>
+      }
+    </div>
+  </section>
 }
